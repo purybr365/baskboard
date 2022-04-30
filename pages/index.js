@@ -48,9 +48,9 @@ export async function getStaticProps() {
       props: {
         "data": {
           "tvl": ["TVL", tvl, "$_thousands"],
-          "port_0": ["Portfolios > 0", port_above_0, "int"],
-          "port_50": ["Portfolios > 50", port_above_50, "int"],
-          "port_1000": ["Portfolios > 1k", port_above_1000, "int"],
+          "port_0": ["Portfolios > $0", port_above_0, "int"],
+          "port_50": ["Portfolios > $50", port_above_50, "int"],
+          "port_1000": ["Portfolios > $1k", port_above_1000, "int"],
           "uda": ["UDA", Object.keys(counts).length, "int"],
           "latestPorts": ["Latest portfolios", latestPortfolios, "table"],
           "latestTransacs": ["Latest transactions", "", "table"]
@@ -77,7 +77,7 @@ export default function Home({ data }) {
         />
       </Head>
       
-      <main className="p-5 pt-10 mx-auto ">
+      <main className="p-5 pt-10 mx-auto">
         <h1 className="text-center text-4xl text-white font-mono mb-10">
           DeFi Basket Dashboard
         </h1>
