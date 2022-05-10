@@ -1,17 +1,21 @@
 import Head from 'next/head'
-import Link from 'next/link';
+import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
 
 import OneByOne from '/components/OneByOne'
+import TotalTVL from '/components/TotalTVL'
+//import TwoByOne from '/components/TwoByOne'
 //import TwobyTwoTable from '/components/TwobyTwoTable'
+import TwobyTwoChart from '/components/TwobyTwoChart'
 
 export async function getStaticProps() {
   try {
     const res = await fetch("https://defibasket.org/api/get-tvl");
     const tvl = await res.json();
-
+    
     const res_port = await fetch("https://defibasket.org/api/get-portfolios");
     const portfolios = await res_port.json();
+    //console.log(portfolios);
 
     let d = new Date();
     let curr_date = d.getDate();
@@ -66,7 +70,8 @@ export async function getStaticProps() {
           "uda": ["UDA", Object.keys(counts).length, "int", "Unique Deposit Address"],
           "active_users": ["Active users", Object.keys(counts_10).length, "int", "UDA with value > $10"],
           "latestPorts": ["Latest baskets", latestPortfolios, "table", latestPortfoliosHeader, ""],
-          "latestTransacs": ["Latest transactions", "", "table", ""]
+          "latestTransacs": ["Latest transactions", "", "table", ""],
+          "portfolios": ["Raw portfolios", portfolios, "", ""]
         }
       },
       revalidate: 60,
@@ -87,8 +92,11 @@ export async function getStaticProps() {
 }
 
 export default function Home({ data }) {
+
+  //const { tvl, isLoading, isError } = getData("https://defibasket.org/api/get-tvl");
+  //console.log(tvl);
   return (
-    <div className="relative h-full w-full font-mono bg-sky-900">
+    <div className="relative w-full h-full font-mono bg-sky-900">
       <Head>
         <title>Baskboard</title>
         <meta name="description" content="The ultimate DeFi Basket dashboard" />
@@ -108,6 +116,7 @@ export default function Home({ data }) {
           <OneByOne data={data.port_0} />
           <OneByOne data={data.port_50} />
           <OneByOne data={data.port_1000} />
+          <TotalTVL data={data.portfolios} />
                     
         {/*<TwobyTwoTable data={data.latestPorts} />
           <TwobyTwoTable data={data.latestTransacs} />
@@ -136,9 +145,9 @@ export default function Home({ data }) {
       </div>}
       </main>
 
-      <footer className="relative bottom-0 w-full text-center border-sky-800 border-t-2 p-3">
+      <footer className="relative w-full text-center border-sky-800 p-3">
         <span className="text-sky-400 font-mono text-sm font-light">
-          Made with `&hearts;`<br /> 
+          Made with &hearts;<br /> 
           <Link href="https://github.com/purybr365/baskboard" className="hover:underline underline-offset-2">GitHub</Link>
           {" "}|{" "}
           <Link href="https://discord.gg/5AVTGwkCEs" className="hover:underline underline-offset-2">Discord</Link>
