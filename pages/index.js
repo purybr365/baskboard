@@ -13,8 +13,15 @@ export async function getStaticProps() {
     const res = await fetch("https://defibasket.org/api/get-tvl");
     const tvl = await res.json();
     
-    const res_port = await fetch("https://defibasket.org/api/get-portfolios");
-    const portfolios = await res_port.json();
+    const res_port = await fetch("https://dev.defibasket.org/api/get-portfolios", {
+      body: JSON.stringify({perPage: -1}),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res_port) => res_port.json());
+    
+    const portfolios = res_port.portfolios;
     //console.log(portfolios);
 
     let d = new Date();
@@ -77,7 +84,7 @@ export async function getStaticProps() {
       revalidate: 60,
     };
   } catch (e) {
-    console.log(e);
+    //console.log(e);
     // throw e;
     return {
       props: {

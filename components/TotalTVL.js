@@ -9,13 +9,16 @@ function TotalTVL( { data } ) {
   let rawTVL = [];
   const portfolios = data[1];
   
+  //console.log(data[1]);
+
   for (const portId in portfolios) {
 
     const portDate = portfolios[portId].createdOn.substring(0, 10);
+    
     const portTVL = portfolios[portId].cached.value;
+    //console.log("data", portDate, "tvl", portTVL);
     
     rawTVL.push({date: portDate, TVL: portTVL});
-
   }
 
   //console.log(rawTVL);
@@ -31,8 +34,14 @@ function TotalTVL( { data } ) {
     acc.push(obj);
     return acc;
   },[]);
+  
+  const dataTVLOrdered = dataTVL.sort(function(a,b){
+    // Turn your strings into dates, and then subtract them
+    // to get a value that is either negative, positive, or zero.
+    return new Date(a.date) - new Date(b.date);
+  });
 
-  const creds = dataTVL.reduce((iterVals, val, curIndex, arr) => {
+  const creds = dataTVLOrdered.reduce((iterVals, val, curIndex, arr) => {
     let { sum, res } = iterVals;
     sum += val.TVL;
     res.push({time:val.date, value:sum});
@@ -42,15 +51,11 @@ function TotalTVL( { data } ) {
     res: []
   });
 
-  const dataGraph = creds.res.sort(function(a,b){
-    // Turn your strings into dates, and then subtract them
-    // to get a value that is either negative, positive, or zero.
-    return new Date(a.time) - new Date(b.time);
-  });
+  const dataGraph = creds.res;
 
-  console.log(dataTVL);
+  //console.log(dataGraph);
 
-    ///////////
+  ///////////
   // Start configuring the AreaClosed chart
   ///////////
   
