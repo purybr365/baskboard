@@ -14,7 +14,7 @@ import TwobyTwoChart from "/components/TwobyTwoChart";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-function getPortfolios () {
+function GetPortfolios () {
   const queryFunction = "get-portfolios";
   const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
   
@@ -25,7 +25,7 @@ function getPortfolios () {
   }
 }
 
-function getTVL () {
+function GetTVL () {
   const queryFunction = "get-tvl";
   const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
 
@@ -99,9 +99,9 @@ export default function Test() {
   //const queryFunction = "get-portfolios";
   //const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
 
-  const { rawPortfoliosData, isLoading, error } = getPortfolios();
+  const { rawPortfoliosData, isLoading, error } = GetPortfolios();
   
-  const { rawTvlData, isLoadingTVL, errorTVL } = getTVL();
+  const { rawTvlData, isLoadingTVL, errorTVL } = GetTVL();
   
 
   if (error) return <div>failed to load</div>
