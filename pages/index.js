@@ -1,107 +1,119 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import React, { useState, useEffect } from 'react'
+import useSWR from "swr";
+import React from "react";
+import Head from "next/head";
+import Link from "next/link";
 
-import OneByOne from '/components/OneByOne'
-import TotalTVL from '/components/TotalTVL'
-//import TwoByOne from '/components/TwoByOne'
-//import TwobyTwoTable from '/components/TwobyTwoTable'
-import TwobyTwoChart from '/components/TwobyTwoChart'
+// Importing dashboard components
+import OneByOne from "/components/OneByOne";
+import TotalTVL from "/components/TotalTVL";
+import TwobyTwoChart from "/components/TwobyTwoChart";
 
-export async function getStaticProps() {
-  try {
-    const res = await fetch("https://defibasket.org/api/get-tvl");
-    const tvl = await res.json();
-    
-    const res_port = await fetch("https://dev.defibasket.org/api/get-portfolios", {
-      body: JSON.stringify({perPage: -1}),
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res_port) => res_port.json());
-    
-    const portfolios = res_port.portfolios;
-    //console.log(portfolios);
+/////////
+// Fetch all portfolios to be shared among components
+/////////
 
-    let d = new Date();
-    let curr_date = d.getDate();
-    let last_wk = curr_date - 7;
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-    //let selectedPorts = 0;
-
-    let port_above_0 = 0;
-    let port_above_50 = 0;
-    let port_above_1000 = 0;
-    
-    let counts = {};
-    let counts_10 = {};
-
-    for (const port of portfolios) {
-      
-      // Counting Unique Deposit Addresses (UDAs)
-      counts[port.ownerAddress] = 1 + (counts[port.ownerAddress] || 0);
-
-      if (port.cached.value >10) {
-        counts_10[port.ownerAddress] = 1 + (counts_10[port.ownerAddress] || 0);
-      }
-
-      // Summing # of ports on each value threshold
-      if (port.cached.value > 1000) {
-        port_above_0++;
-        port_above_50++;
-        port_above_1000++;
-      } else if (port.cached.value > 50) {
-        port_above_0++;
-        port_above_50++;
-      } else {
-        port_above_0++;
-      }
-      
-    }
-
-    let latestPortfolios = portfolios.slice(portfolios.length-10,portfolios.length);
-    const latestPortfoliosHeader = {
-      header1: "nftId", 
-      header2: "Date", 
-      header3: "TVL"
-    };
-
-    return {
-      props: {
-        "data": {
-          "tvl": ["TVL", tvl, "$_thousands", "Total Value Locked"],
-          "port_0": ["Baskets > $0", port_above_0, "int", ""],
-          "port_50": ["Baskets > $50", port_above_50, "int", ""],
-          "port_1000": ["Baskets > $1k", port_above_1000, "int", ""],
-          "uda": ["UDA", Object.keys(counts).length, "int", "Unique Deposit Address"],
-          "active_users": ["Active users", Object.keys(counts_10).length, "int", "UDA with value > $10"],
-          "latestPorts": ["Latest baskets", latestPortfolios, "table", latestPortfoliosHeader, ""],
-          "latestTransacs": ["Latest transactions", "", "table", ""],
-          "portfolios": ["Raw portfolios", portfolios, "", ""]
-        }
-      },
-      revalidate: 60,
-    };
-  } catch (e) {
-    //console.log(e);
-    // throw e;
-    return {
-      props: {
-        "data": {
-          "error": true,
-          "error_msg": e.errno
-        }
-      },
-      revalidate: 60,
-    };
+function getPortfolios () {
+  const queryFunction = "get-portfolios";
+  const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
+  
+  return {
+    rawPortfoliosData: data,
+    isLoading: !error && !data,
+    isError: error,
   }
 }
 
-export default function Home({ data }) {
+function getTVL () {
+  const queryFunction = "get-tvl";
+  const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
 
-  //const { tvl, isLoading, isError } = getData("https://defibasket.org/api/get-tvl");
-  //console.log(tvl);
+  return {
+    rawTvlData: data,
+    isLoading: !error && !data,
+    isError: error,
+  }
+}
+
+function calculateMetricsFromPortfolios (portfolios, tvl) {
+
+  let d = new Date();
+  let curr_date = d.getDate();
+  let last_wk = curr_date - 7;
+
+  let port_above_0 = 0;
+  let port_above_50 = 0;
+  let port_above_1000 = 0;
+  
+  let counts = {};
+  let counts_10 = {};
+  console.log("portfoio", portfolios);
+  for (const port of portfolios) {
+    
+    // Counting Unique Deposit Addresses (UDAs)
+    counts[port.ownerAddress] = 1 + (counts[port.ownerAddress] || 0);
+
+    if (port.cached.value >10) {
+      counts_10[port.ownerAddress] = 1 + (counts_10[port.ownerAddress] || 0);
+    }
+
+    // Summing # of ports on each value threshold
+    if (port.cached.value > 1000) {
+      port_above_0++;
+      port_above_50++;
+      port_above_1000++;
+    } else if (port.cached.value > 50) {
+      port_above_0++;
+      port_above_50++;
+    } else {
+      port_above_0++;
+    }
+  }
+
+  let latestPortfolios = portfolios.slice(portfolios.length-10,portfolios.length);
+  const latestPortfoliosHeader = {
+    header1: "nftId", 
+    header2: "Date", 
+    header3: "TVL"
+  };
+
+  return {
+    "data": {
+      "tvl": ["TVL", tvl, "$_thousands", "Total Value Locked"],
+      "port_0": ["Baskets > $0", port_above_0, "int", ""],
+      "port_50": ["Baskets > $50", port_above_50, "int", ""],
+      "port_1000": ["Baskets > $1k", port_above_1000, "int", ""],
+      "uda": ["UDA", Object.keys(counts).length, "int", "Unique Deposit Address"],
+      "active_users": ["Active users", Object.keys(counts_10).length, "int", "UDA with value > $10"],
+      "latestPorts": ["Latest baskets", latestPortfolios, "table", latestPortfoliosHeader, ""],
+      "latestTransacs": ["Latest transactions", "", "table", ""],
+      "portfolios": ["Raw portfolios", portfolios, "", ""]
+    }
+  }
+
+}
+
+export default function Test() {
+
+  //const queryFunction = "get-portfolios";
+  //const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
+
+  const { rawPortfoliosData, isLoading, error } = getPortfolios();
+  
+  const { rawTvlData, isLoadingTVL, errorTVL } = getTVL();
+  
+
+  if (error) return <div>failed to load</div>
+  if (isLoading) return (
+    <div className="relative w-screen h-screen font-mono bg-sky-900 p-10">
+      <div className="content-center"><h1 className="animate-pulse text-center text-4xl text-white font-mono mb-10">Loading</h1></div>
+    </div>
+  )
+  
+  const { data } = calculateMetricsFromPortfolios(rawPortfoliosData.portfolios, rawTvlData.tvl);
+
+  console.log("data", data);
   return (
     <div className="relative w-full h-full font-mono bg-sky-900">
       <Head>
@@ -124,19 +136,7 @@ export default function Home({ data }) {
           <OneByOne data={data.port_50} />
           <OneByOne data={data.port_1000} />
           <TotalTVL data={data.portfolios} />
-                    
-        {/*<TwobyTwoTable data={data.latestPorts} />
-          <TwobyTwoTable data={data.latestTransacs} />
-          <TwobyTwoTable data={data.latestTransacs} />
-          <TwobyTwoTable data={data.latestTransacs} />
-          <TwobyTwoTable data={data.latestTransacs} />
-        <TwobyTwoTable data={data.latestTransacs} />*/}
-
-          
-
-          {/* 1 rows x 1 collumn */}
-          
-          {/* 2 rows x 1 collumn */}
+ 
         </div>
         :
         <div className="mx-auto grid grid-cols-2 lg:grid-cols-6">
@@ -144,12 +144,8 @@ export default function Home({ data }) {
             <span className="bg-red-500 bg-opacity-50 rounded-md text-center text-xl text-white font-mono mb-10">Error - Couldn&apos;t update data <br />
             Message: {data.error_msg}</span>
           </div>
-    
-          
-          {/* 1 rows x 1 collumn */}
-          
-          {/* 2 rows x 1 collumn */}
-      </div>}
+        </div>
+        }
       </main>
 
       <footer className="relative w-full text-center border-sky-800 p-3">
