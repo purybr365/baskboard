@@ -68,7 +68,7 @@ export default function Index() {
       
       <main className="p-5 pt-10 mx-auto">
         <h1 className="text-center text-4xl text-white font-mono mb-10">
-          DeFi Basket Dashboard
+          DeFi Basket Dashboard Test
         </h1>
         {!data.error ? 
         <div className="mx-auto grid grid-cols-2 lg:grid-cols-6">
