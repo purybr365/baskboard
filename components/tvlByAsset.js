@@ -70,11 +70,11 @@ export function TvlByAssetComponent({ data }) {
                 <tbody className="divide-y divide-sky-800">
                   {largestAssets.map((asset) => (
                     <tr key={asset.symbol}>
-                      <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm font-medium text-cyan-600 sm:pl-6 md:pl-0">
+                      <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm font-medium text-gray-200 sm:pl-6 md:pl-0">
                         {asset.symbol}
                       </td>
-                      <td className="whitespace-nowrap py-2 px-3 text-right text-sm text-cyan-600">{asset.amountInUsd.toFixed(2)}</td>
-                      <td className="whitespace-nowrap py-2 px-3 text-right text-sm text-cyan-600">TBC</td>
+                      <td className="whitespace-nowrap py-2 px-3 text-right text-sm text-gray-200">{asset.amountInUsd.toFixed(2)}</td>
+                      <td className="whitespace-nowrap py-2 px-3 text-right text-sm text-gray-200">TBC</td>
                     </tr>
                   ))}
                 </tbody>
