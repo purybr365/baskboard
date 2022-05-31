@@ -7,14 +7,33 @@ const baseUrls = {
   "root": "http://defibasket.org",
   "get-portfolios": "/api/get-portfolios/",
   "get-tvl": "/api/v1/get-tvl/",
+  "get-assets": "/api/get-assets/",
 };
 
 export default async function handler(request, response) {
 
   const {
     queryFunction,
-    pageIndex,
+    perPage,
+    networkName,
   } = await request.query;
+
+  function buildHeader(perPage, networkName) {
+    var query = {};
+    if (perPage !== undefined) {
+      query["perPage"] = perPage;
+    }
+
+    if (networkName !== undefined) {
+      query["networkName"] = networkName;
+    }
+
+    return query;
+  }
+
+  const query = buildHeader(perPage, networkName)
+
+  // console.log("query", query);
 
   // Direct request  
   try {
@@ -22,7 +41,7 @@ export default async function handler(request, response) {
     const res = await fetch(
       baseUrls.root + baseUrls[queryFunction],
       {
-        body: JSON.stringify({perPage: -1}),
+        body: JSON.stringify(query),
         headers: {
           "Content-Type": "application/json",
         },

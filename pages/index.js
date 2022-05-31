@@ -2,6 +2,8 @@ import useSWR from "swr";
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
+import { calculateTvlByAssets, TvlByAssetComponent } from "/components/tvlByAsset";
+import rawAssets from "/common/assets.json";
 
 // Importing dashboard components
 import OneByOne from "/components/OneByOne";
@@ -15,7 +17,7 @@ import TwobyTwoChart from "/components/TwobyTwoChart";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function GetPortfolios () {
-  const queryFunction = "get-portfolios";
+  const queryFunction = "get-portfolios&perPage=-1";
   const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
   
   return {
@@ -36,6 +38,17 @@ function GetTVL () {
   }
 }
 
+function GetAssets () {
+  const queryFunction = "get-assets&networkName=polygon";
+  const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
+
+  return {
+    rawAssets: data,
+    isLoading: !error && !data,
+    isError: error,
+  }
+}
+
 function calculateMetricsFromPortfolios (portfolios, tvl) {
 
   let d = new Date();
@@ -48,7 +61,7 @@ function calculateMetricsFromPortfolios (portfolios, tvl) {
   
   let counts = {};
   let counts_10 = {};
-  console.log("portfoio", portfolios);
+  //console.log("portfoio", portfolios);
   for (const port of portfolios) {
     
     // Counting Unique Deposit Addresses (UDAs)
@@ -94,26 +107,102 @@ function calculateMetricsFromPortfolios (portfolios, tvl) {
 
 }
 
-export default function Test() {
+// Helper function to group by week
+function setToMonday( date ) {
+  var day = date.getDay() || 7;  
+  if( day !== 1 ) 
+      date.setHours(-24 * (day - 1)); 
+  return date;
+}
+
+// Helper function to find fee in USD based on latestPrice
+// from assets db list
+function findFeeInUsd (fee, assets) {
+  const asset = assets.find(item => item._id === fee.asset);
+  const feeAmount = fee.amount / (10 ** asset.decimals);
+  
+  // TODO: Replace latestPrice for historical price at fee acrrual time
+  const feeInUsd = asset.latestPrice * feeAmount;
+
+  return feeInUsd;
+}
+
+function calculateMetricsFromTransactions(transactions, assets) {
+  
+  const sumFees = [];
+  
+  for (const transac of transactions) {
+    
+    // Determining fees by date
+    for (const fee of transac.fees) {
+      sumFees.push({
+        date: setToMonday(new Date(transac.createdOn)), 
+        feeInUsd: findFeeInUsd(fee, assets),
+      });
+    }
+  }
+
+  const weeklyFees = sumFees.reduce((acc, obj)=>{
+    var existObj = acc.find(item => item.date === obj.date);
+    if (existObj) {
+      existObj.feeInUsd = existObj.feeInUsd + obj.feeInUsd;
+      return acc;
+    }
+    acc.push(obj);
+    return acc;
+  },[]);
+
+  // console.log("weeklyFee", weeklyFees);
+  return weeklyFees;
+
+  // Grouping fees by week
+
+}
+
+export default function App() {
 
   //const queryFunction = "get-portfolios";
   //const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
 
   const { rawPortfoliosData, isLoading, error } = GetPortfolios();
-  
+  console.log("port", rawPortfoliosData);
   const { rawTvlData, isLoadingTVL, errorTVL } = GetTVL();
   
+  // const { rawAssets,  isLoadingAssets, errorAssets } = GetAssets();
 
-  if (error) return <div>failed to load</div>
-  if (isLoading) return (
+  const loading =
     <div className="relative w-screen h-screen font-mono bg-sky-900 p-10">
       <div className="content-center"><h1 className="animate-pulse text-center text-4xl text-white font-mono mb-10">Loading</h1></div>
     </div>
-  )
-  
-  const { data } = calculateMetricsFromPortfolios(rawPortfoliosData.portfolios, rawTvlData.tvl);
 
-  console.log("data", data);
+  if (error) return <div>failed to load</div>
+  if (isLoading) return loading
+  // if (isLoadingAssets) return loading
+
+  // Test set for transactions
+  const transactions = [
+    {  
+      createdOn: "2022-04-11T03:58:39.000Z",
+      fees: [{
+        amount: 500000000000000, 
+        asset: '48f0325c-e5cc-4dac-9873-793f6c12fe08'
+      }]
+    },
+    {
+      createdOn: "2022-04-24T03:58:39.000Z",
+      fees: [{
+        amount: 1000000000000000, 
+        asset: '48f0325c-e5cc-4dac-9873-793f6c12fe08'
+      }]
+    },
+  ];
+
+  const { data } = calculateMetricsFromPortfolios(rawPortfoliosData.portfolios, rawTvlData.tvl);
+  // const { weeklyFees } = calculateMetricsFromTransactions(transactions, rawAssets);
+  const tvlByAssets = calculateTvlByAssets(rawPortfoliosData.portfolios, rawAssets);
+
+  console.log("tvlByAssets", tvlByAssets);
+  // console.log("fee", weeklyFees);
   return (
     <div className="relative w-full h-full font-mono bg-sky-900">
       <Head>
@@ -136,6 +225,7 @@ export default function Test() {
           <OneByOne data={data.port_50} />
           <OneByOne data={data.port_1000} />
           <TotalTVL data={data.portfolios} />
+          <TvlByAssetComponent data={tvlByAssets} />
  
         </div>
         :
