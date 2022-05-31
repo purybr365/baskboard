@@ -2,6 +2,8 @@ import useSWR from "swr";
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
+import { calculateTvlByAssets, TvlByAssetComponent } from "/components/tvlByAsset";
+import rawAssets from "/common/assets.json";
 
 // Importing dashboard components
 import OneByOne from "/components/OneByOne";
@@ -150,32 +152,32 @@ function calculateMetricsFromTransactions(transactions, assets) {
     return acc;
   },[]);
 
-  console.log("weeklyFee", weeklyFees);
+  // console.log("weeklyFee", weeklyFees);
   return weeklyFees;
 
   // Grouping fees by week
 
 }
 
-export default function Test() {
+export default function App() {
 
   //const queryFunction = "get-portfolios";
   //const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
 
   const { rawPortfoliosData, isLoading, error } = GetPortfolios();
-  
+  console.log("port", rawPortfoliosData);
   const { rawTvlData, isLoadingTVL, errorTVL } = GetTVL();
   
-  const { rawAssets,  isLoadingAssets, errorAssets } = GetAssets();
+  // const { rawAssets,  isLoadingAssets, errorAssets } = GetAssets();
 
-  //console.log("assets", rawAssets);
-
-  if (error) return <div>failed to load</div>
-  if (isLoading) return (
+  const loading =
     <div className="relative w-screen h-screen font-mono bg-sky-900 p-10">
       <div className="content-center"><h1 className="animate-pulse text-center text-4xl text-white font-mono mb-10">Loading</h1></div>
     </div>
-  )
+
+  if (error) return <div>failed to load</div>
+  if (isLoading) return loading
+  // if (isLoadingAssets) return loading
 
   // Test set for transactions
   const transactions = [
@@ -196,9 +198,11 @@ export default function Test() {
   ];
 
   const { data } = calculateMetricsFromPortfolios(rawPortfoliosData.portfolios, rawTvlData.tvl);
-  const { weeklyFees } = calculateMetricsFromTransactions(transactions, rawAssets);
+  // const { weeklyFees } = calculateMetricsFromTransactions(transactions, rawAssets);
+  const tvlByAssets = calculateTvlByAssets(rawPortfoliosData.portfolios, rawAssets);
 
-  //console.log("data", data);
+  console.log("tvlByAssets", tvlByAssets);
+  // console.log("fee", weeklyFees);
   return (
     <div className="relative w-full h-full font-mono bg-sky-900">
       <Head>
@@ -221,6 +225,7 @@ export default function Test() {
           <OneByOne data={data.port_50} />
           <OneByOne data={data.port_1000} />
           <TotalTVL data={data.portfolios} />
+          <TvlByAssetComponent data={tvlByAssets} />
  
         </div>
         :

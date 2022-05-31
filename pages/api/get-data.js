@@ -33,7 +33,7 @@ export default async function handler(request, response) {
 
   const query = buildHeader(perPage, networkName)
 
-  console.log("query", query);
+  // console.log("query", query);
 
   // Direct request  
   try {
