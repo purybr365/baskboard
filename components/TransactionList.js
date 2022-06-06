@@ -72,7 +72,7 @@ export default function TransactionList ({ data }) {
                   {sortedTransactions.map((transaction) => (
                     <tr key={transaction}>
                       <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm font-medium text-gray-200 sm:pl-6 md:pl-0">
-                        <a href={"https://polygonscan.com/tx/" + transaction.txHash} target="_blank">
+                        <a href={"https://polygonscan.com/tx/" + transaction.txHash} target="_blank" rel="noreferrer">
                           <span className={"inline-flex items-center px-2 py-0.5 rounded text-xs font-medium " + typeOfEvent[transaction.mainEventName].color}>
                             {typeOfEvent[transaction.mainEventName].event}
                           </span>
