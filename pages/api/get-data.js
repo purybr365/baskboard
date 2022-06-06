@@ -4,10 +4,11 @@
 //const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const baseUrls = {
-  "root": "http://defibasket.org",
+  "root": "http://dev.defibasket.org",
   "get-portfolios": "/api/get-portfolios/",
   "get-tvl": "/api/v1/get-tvl/",
   "get-assets": "/api/get-assets/",
+  "get-transactions": "/api/get-transactions/",
 };
 
 export default async function handler(request, response) {

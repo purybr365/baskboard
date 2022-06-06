@@ -8,6 +8,8 @@ import rawAssets from "/common/assets.json";
 // Importing dashboard components
 import OneByOne from "/components/OneByOne";
 import TotalTVL from "/components/TotalTVL";
+import WeeklyFees from "/components/WeeklyFees";
+import TransactionList from "/components/TransactionList";
 import TwobyTwoChart from "/components/TwobyTwoChart";
 
 /////////
@@ -38,14 +40,25 @@ function GetTVL () {
   }
 }
 
-function GetAssets () {
-  const queryFunction = "get-assets&networkName=polygon";
-  const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
+// function GetAssets () {
+//   const queryFunction = "get-assets&networkName=polygon";
+//   const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
 
+//   return {
+//     rawAssets: data,
+//     isLoading: !error && !data,
+//     isError: error,
+//   }
+// }
+
+function GetTransactions () {
+  const queryFunction = "get-transactions&perPage=-1";
+  const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
+  
   return {
-    rawAssets: data,
-    isLoading: !error && !data,
-    isError: error,
+    rawTransactionsData: data,
+    isLoadingTransac: !error && !data,
+    isErrorTransac: error,
   }
 }
 
@@ -118,40 +131,44 @@ function setToMonday( date ) {
 // Helper function to find fee in USD based on latestPrice
 // from assets db list
 function findFeeInUsd (fee, assets) {
-  const asset = assets.find(item => item._id === fee.asset);
-  const feeAmount = fee.amount / (10 ** asset.decimals);
+  //const asset = assets.find(item => item._id === fee._id);
+  //const feeAmount = fee.amount ;
   
   // TODO: Replace latestPrice for historical price at fee acrrual time
-  const feeInUsd = asset.latestPrice * feeAmount;
+  const feeInUsd = fee.currentPriceUsd * fee.amount;
 
   return feeInUsd;
 }
 
 function calculateMetricsFromTransactions(transactions, assets) {
   
-  const sumFees = [];
+  const sumWeeklyFees = [];
   
   for (const transac of transactions) {
-    
+    //console.log("intrans", transac);
     // Determining fees by date
-    for (const fee of transac.fees) {
-      sumFees.push({
-        date: setToMonday(new Date(transac.createdOn)), 
-        feeInUsd: findFeeInUsd(fee, assets),
-      });
+    if (transac.fees) {
+      for (const fee of transac.fees) {
+        sumWeeklyFees.push({
+          date: setToMonday(new Date(transac.createdOn)), 
+          feeInUsd: findFeeInUsd(fee, assets),
+        });
+      }
     }
   }
 
-  const weeklyFees = sumFees.reduce((acc, obj)=>{
-    var existObj = acc.find(item => item.date === obj.date);
+  // console.log("fees", sumFees);
+
+  const weeklyFees = sumWeeklyFees.reduce((acc, obj) => {
+    var existObj = acc.find(item => new Date(item.date).toDateString() === new Date(obj.date).toDateString());
     if (existObj) {
       existObj.feeInUsd = existObj.feeInUsd + obj.feeInUsd;
       return acc;
-    }
+    } 
     acc.push(obj);
     return acc;
   },[]);
-
+  
   // console.log("weeklyFee", weeklyFees);
   return weeklyFees;
 
@@ -165,8 +182,9 @@ export default function App() {
   //const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
 
   const { rawPortfoliosData, isLoading, error } = GetPortfolios();
-  console.log("port", rawPortfoliosData);
+  // console.log("port", rawPortfoliosData);
   const { rawTvlData, isLoadingTVL, errorTVL } = GetTVL();
+  const { rawTransactionsData, isLoadingTransac, isErrorTransac } = GetTransactions();
   
   // const { rawAssets,  isLoadingAssets, errorAssets } = GetAssets();
 
@@ -177,32 +195,35 @@ export default function App() {
 
   if (error) return <div>failed to load</div>
   if (isLoading) return loading
+  if (error) return <div>failed to load</div>
+  if (isLoadingTransac) return loading
   // if (isLoadingAssets) return loading
 
   // Test set for transactions
-  const transactions = [
-    {  
-      createdOn: "2022-04-11T03:58:39.000Z",
-      fees: [{
-        amount: 500000000000000, 
-        asset: '48f0325c-e5cc-4dac-9873-793f6c12fe08'
-      }]
-    },
-    {
-      createdOn: "2022-04-24T03:58:39.000Z",
-      fees: [{
-        amount: 1000000000000000, 
-        asset: '48f0325c-e5cc-4dac-9873-793f6c12fe08'
-      }]
-    },
-  ];
+  // const transactions = [
+  //   {  
+  //     createdOn: "2022-04-11T03:58:39.000Z",
+  //     fees: [{
+  //       amount: 500000000000000, 
+  //       asset: '48f0325c-e5cc-4dac-9873-793f6c12fe08'
+  //     }]
+  //   },
+  //   {
+  //     createdOn: "2022-04-24T03:58:39.000Z",
+  //     fees: [{
+  //       amount: 1000000000000000, 
+  //       asset: '48f0325c-e5cc-4dac-9873-793f6c12fe08'
+  //     }]
+  //   },
+  // ];
 
   const { data } = calculateMetricsFromPortfolios(rawPortfoliosData.portfolios, rawTvlData.tvl);
-  // const { weeklyFees } = calculateMetricsFromTransactions(transactions, rawAssets);
+  const weeklyFees = calculateMetricsFromTransactions(rawTransactionsData.transactions, rawAssets);
   const tvlByAssets = calculateTvlByAssets(rawPortfoliosData.portfolios, rawAssets);
 
-  console.log("tvlByAssets", tvlByAssets);
+  // console.log("tvlByAssets", tvlByAssets);
   // console.log("fee", weeklyFees);
+  
   return (
     <div className="relative w-full h-full font-mono bg-sky-900">
       <Head>
@@ -226,7 +247,8 @@ export default function App() {
           <OneByOne data={data.port_1000} />
           <TotalTVL data={data.portfolios} />
           <TvlByAssetComponent data={tvlByAssets} />
- 
+          <WeeklyFees data={weeklyFees} />
+          <TransactionList data={rawTransactionsData.transactions}/>
         </div>
         :
         <div className="mx-auto grid grid-cols-2 lg:grid-cols-6">

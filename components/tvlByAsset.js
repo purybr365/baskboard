@@ -41,13 +41,13 @@ export function calculateTvlByAssets(portfolios, assets) {
 export function TvlByAssetComponent({ data }) {
   
   // console.log("data1", data);
-  let largestAssets = data.sort((a,b) => (a.amountInUsd < b.amountInUsd) ? 1 : -1).slice(0,10);
-  console.log("largest", largestAssets);
+  let largestAssets = data.sort((a,b) => (a.amountInUsd < b.amountInUsd) ? 1 : -1);
+  // console.log("largest", largestAssets);
 
   return (
     <div className="col-span-2 p-5 m-2 rounded-lg bg-sky-800 text-center">
       <span className="text-sky-400">Largest assets by TVL</span><br />
-      <div className="mt-3 flex flex-col text-left">
+      <div className="mt-3 flex flex-col text-left overflow-scroll max-h-72">
           <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
               <table className="min-w-full divide-y divide-sky-700">
@@ -84,9 +84,6 @@ export function TvlByAssetComponent({ data }) {
         </div>
       </div>
 
-
-
-    
   ); 
 
 }

@@ -62,7 +62,7 @@ function TotalTVL( { data } ) {
   return(
     <div className="p-5 m-2 rounded-lg bg-sky-800 text-center col-span-2">
       <span className="text-sky-400">TVL</span><br /><br />
-      <TVLChart data={dataGraph} className="bg-gray-500" />
+      <TVLChart data={dataGraph} className="bg-gray-500" />    
     </div>
   )
 }

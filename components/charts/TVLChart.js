@@ -61,7 +61,7 @@ function TVLChart ({data}) {
       chart.applyOptions(darkTheme.chart);
 	    newSeries.applyOptions(darkTheme.series.areaStyle);
 			newSeries.setData(data);
-      //chart.timeScale().fitContent();
+      chart.timeScale().fitContent();
 
 			window.addEventListener('resize', handleResize);
 
