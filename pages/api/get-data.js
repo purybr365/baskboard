@@ -4,7 +4,7 @@
 //const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const baseUrls = {
-  "root": "http://dev.defibasket.org",
+  "root": "http://defibasket.org",
   "get-portfolios": "/api/get-portfolios/",
   "get-tvl": "/api/v1/get-tvl/",
   "get-assets": "/api/get-assets/",
