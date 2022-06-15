@@ -4,13 +4,14 @@ import Head from "next/head";
 import Link from "next/link";
 import { calculateTvlByAssets, TvlByAssetComponent } from "/components/tvlByAsset";
 import rawAssets from "/common/assets.json";
+import { setToMonday } from "/components/utils";
 
 // Importing dashboard components
 import OneByOne from "/components/OneByOne";
 import TotalTVL from "/components/TotalTVL";
 import WeeklyFees from "/components/WeeklyFees";
 import TransactionList from "/components/TransactionList";
-import TwobyTwoChart from "/components/TwobyTwoChart";
+import TransactionsInOut from "/components/TransactionsInOut";
 
 /////////
 // Fetch all portfolios to be shared among components
@@ -120,13 +121,7 @@ function calculateMetricsFromPortfolios (portfolios, tvl) {
 
 }
 
-// Helper function to group by week
-function setToMonday( date ) {
-  var day = date.getDay() || 7;  
-  if( day !== 1 ) 
-      date.setHours(-24 * (day - 1)); 
-  return date;
-}
+
 
 // Helper function to find fee in USD based on latestPrice
 // from assets db list
@@ -186,6 +181,8 @@ export default function App() {
   const { rawTvlData, isLoadingTVL, errorTVL } = GetTVL();
   const { rawTransactionsData, isLoadingTransac, isErrorTransac } = GetTransactions();
   
+  // console.log("transac", rawTransactionsData);
+
   // const { rawAssets,  isLoadingAssets, errorAssets } = GetAssets();
 
   const loading =
@@ -248,7 +245,8 @@ export default function App() {
           <TotalTVL data={data.portfolios} />
           <TvlByAssetComponent data={tvlByAssets} />
           <WeeklyFees data={weeklyFees} />
-          <TransactionList data={rawTransactionsData.transactions}/>
+          <TransactionList data={rawTransactionsData.transactions} />
+          <TransactionsInOut transactions={rawTransactionsData.transactions} assets={rawAssets} />
         </div>
         :
         <div className="mx-auto grid grid-cols-2 lg:grid-cols-6">

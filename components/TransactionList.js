@@ -32,6 +32,9 @@ function relativeDate(dateString) {
 }
 
 export default function TransactionList ({ data }) {
+  
+  console.log("transac", data);
+  
   const typeOfEvent = {
     "DEFIBASKET_EDIT": {event: "edit", color: "bg-yellow-100 text-yellow-800"},
     "DEFIBASKET_CREATE": {event: "create", color: "bg-green-100 text-green-800"},
