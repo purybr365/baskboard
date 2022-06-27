@@ -1,3 +1,5 @@
+import Tooltip from '@mui/material/Tooltip'
+
 function relativeDate(dateString) {
   // Make a fuzzy time
   const delta = Math.round((new Date - new Date(dateString)) / 1000);
@@ -10,21 +12,21 @@ function relativeDate(dateString) {
   var fuzzy;
 
   if (delta < 30) {
-      fuzzy = 'just then.';
+      fuzzy = 'just now';
   } else if (delta < minute) {
       fuzzy = delta + ' seconds ago.';
   } else if (delta < 2 * minute) {
-      fuzzy = 'a minute ago.'
+      fuzzy = 'a min ago'
   } else if (delta < hour) {
       fuzzy = Math.floor(delta / minute) + ' minutes ago.';
   } else if (Math.floor(delta / hour) == 1) {
-      fuzzy = '1 hour ago.'
+      fuzzy = '1 h ago'
   } else if (delta < day) {
-      fuzzy = Math.floor(delta / hour) + ' hours ago.';
+      fuzzy = Math.floor(delta / hour) + ' hrs ago';
   } else if (delta < day * 2) {
       fuzzy = 'yesterday';
   } else {
-      fuzzy = Math.round(delta / day).toString() + ' days ago.';
+      fuzzy = Math.round(delta / day).toString() + ' days ago';
   }
 
   return fuzzy;
@@ -48,10 +50,10 @@ export default function TransactionList ({ data }) {
   return (
     <div className="col-span-2 p-5 m-2 rounded-lg bg-sky-800 text-center">
       <span className="text-sky-400">List of Transactions</span><br />
-      <div className="mt-3 flex flex-col text-left overflow-scroll max-h-72">
-          <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-              <table className="min-w-full divide-y divide-sky-700">
+      <div className="mt-3 flex flex-col text-left max-h-72 w-full">
+          <div className="overflow-x-auto">
+            <div className="inline-block w-full py-2 align-middle">
+              <table className="w-full divide-y divide-sky-700">
                 <thead>
                   <tr>
                     <th
@@ -72,11 +74,13 @@ export default function TransactionList ({ data }) {
                   {sortedTransactions.map((transaction) => (
                     <tr key={transaction}>
                       <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm font-medium text-gray-200 sm:pl-6 md:pl-0">
-                        <a href={"https://polygonscan.com/tx/" + transaction.txHash} target="_blank" rel="noreferrer">
-                          <span className={"inline-flex items-center px-2 py-0.5 rounded text-xs font-medium " + typeOfEvent[transaction.mainEventName].color}>
-                            {typeOfEvent[transaction.mainEventName].event}
-                          </span>
-                        </a>
+                        <Tooltip title="Click to PolygonScan" placement="top" arrow>
+                          <a href={"https://polygonscan.com/tx/" + transaction.txHash} target="_blank" rel="noreferrer">
+                            <span className={"inline-flex items-center px-2 py-0.5 rounded text-xs font-medium " + typeOfEvent[transaction.mainEventName].color}>
+                              {typeOfEvent[transaction.mainEventName].event}
+                            </span>
+                          </a>
+                        </Tooltip>
                       </td>
                       <td className="whitespace-nowrap py-2 px-3 text-left text-sm text-gray-200">{relativeDate(transaction.createdOn)}</td>
                       <td className="whitespace-nowrap py-2 px-3 text-left text-sm text-gray-200">{transaction.nftId}</td>
