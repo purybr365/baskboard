@@ -12,11 +12,15 @@ const baseUrls = {
 };
 
 export default async function handler(request, response) {
-
+  response.setHeader(
+    "Cache-Control",
+    "max-age=0, s-maxage=60, stale-while-revalidate, public"
+  );
   const {
     queryFunction,
     perPage,
     networkName,
+    walletAddress,
   } = await request.query;
 
   function buildHeader(networkName, walletAddress, pageIndex, perPage) {
@@ -25,34 +29,36 @@ export default async function handler(request, response) {
       networkName: networkName ? networkName : null,
       walletAddress: walletAddress ? walletAddress : null,
       pageIndex: pageIndex ? pageIndex : null,
-      perPage: perPage ? perPage : null,
+      perPage: perPage ? Number(perPage) : null,
     }
     
   }
 
   const body = JSON.stringify(buildHeader(networkName, null, null, perPage));
 
-  console.log("query", body);
+  console.log("query", baseUrls.root + baseUrls[queryFunction]);
 
   // Direct request  
   try {
     
-    await fetch(
+    const res = await fetch(
       baseUrls.root + baseUrls[queryFunction],
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "accept": "application/json",
+          "content-type": "application/json",
         },
         body, // body
       })
       .then((res) => res.json());
-    
+    // console.log("res", res);
     // return response.status(200);
+    response.json(res);
   }
   catch (e) {
     response.status(500).json(e);
   }  
 
-  response.status(200)
+  // return response.status(200);
 }
