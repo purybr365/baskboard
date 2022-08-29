@@ -40,7 +40,7 @@ function NumTransac( { data } ) {
   return(
     <div className="p-5 m-2 rounded-lg bg-sky-800 text-center col-span-2">
       <span className="text-sky-400">Number of Transactions per Day</span><br /><br />
-      <FeesChart data={orderedWeeklyFees} className="bg-gray-500" />
+      {/* <FeesChart data={orderedWeeklyFees} className="bg-gray-500" /> */}
     </div>
   )
 }
