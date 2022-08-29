@@ -4,7 +4,7 @@
 //const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const baseUrls = {
-  "root": "http://defibasket.org",
+  "root": "https://dev.defibasket.org",
   "get-portfolios": "/api/get-portfolios/",
   "get-tvl": "/api/v1/get-tvl/",
   "get-assets": "/api/get-assets/",
@@ -19,38 +19,36 @@ export default async function handler(request, response) {
     networkName,
   } = await request.query;
 
-  function buildHeader(perPage, networkName) {
-    var query = {};
-    if (perPage !== undefined) {
-      query["perPage"] = perPage;
+  function buildHeader(networkName, walletAddress, pageIndex, perPage) {
+    
+    return {
+      networkName: networkName ? networkName : null,
+      walletAddress: walletAddress ? walletAddress : null,
+      pageIndex: pageIndex ? pageIndex : null,
+      perPage: perPage ? perPage : null,
     }
-
-    if (networkName !== undefined) {
-      query["networkName"] = networkName;
-    }
-
-    return query;
+    
   }
 
-  const query = buildHeader(perPage, networkName)
+  const body = JSON.stringify(buildHeader(networkName, null, null, perPage));
 
-  // console.log("query", query);
+  console.log("query", body);
 
   // Direct request  
   try {
     
-    const res = await fetch(
+    await fetch(
       baseUrls.root + baseUrls[queryFunction],
       {
-        body: JSON.stringify(query),
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        method: "POST",
+        body, // body
       })
       .then((res) => res.json());
     
-    response.json(res);
+    // return response.status(200);
   }
   catch (e) {
     response.status(500).json(e);

@@ -80,16 +80,16 @@ function calculateMetricsFromPortfolios (portfolios, tvl) {
     // Counting Unique Deposit Addresses (UDAs)
     counts[port.ownerAddress] = 1 + (counts[port.ownerAddress] || 0);
 
-    if (port.cached.value >10) {
+    if (port.value >10) {
       counts_10[port.ownerAddress] = 1 + (counts_10[port.ownerAddress] || 0);
     }
 
     // Summing # of ports on each value threshold
-    if (port.cached.value > 1000) {
+    if (port.value > 1000) {
       port_above_0++;
       port_above_50++;
       port_above_1000++;
-    } else if (port.cached.value > 50) {
+    } else if (port.value > 50) {
       port_above_0++;
       port_above_50++;
     } else {
@@ -216,7 +216,7 @@ export default function App() {
   //     }]
   //   },
   // ];
-
+  console.log("data", rawTransactionsData);
   const { data } = calculateMetricsFromPortfolios(rawPortfoliosData.portfolios, rawTvlData.tvl);
   const weeklyFees = calculateMetricsFromTransactions(rawTransactionsData.transactions, rawAssets);
   const tvlByAssets = calculateTvlByAssets(rawPortfoliosData.portfolios, rawAssets);
