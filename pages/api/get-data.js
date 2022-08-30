@@ -4,7 +4,7 @@
 //const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const baseUrls = {
-  "root": "http://defibasket.org",
+  "root": "https://dev.defibasket.org",
   "get-portfolios": "/api/get-portfolios/",
   "get-tvl": "/api/v1/get-tvl/",
   "get-assets": "/api/get-assets/",
@@ -12,29 +12,31 @@ const baseUrls = {
 };
 
 export default async function handler(request, response) {
-
+  response.setHeader(
+    "Cache-Control",
+    "max-age=0, s-maxage=60, stale-while-revalidate, public"
+  );
   const {
     queryFunction,
     perPage,
     networkName,
+    pageIndex,
   } = await request.query;
 
-  function buildHeader(perPage, networkName) {
-    var query = {};
-    if (perPage !== undefined) {
-      query["perPage"] = perPage;
+  function buildHeader(networkName, walletAddress, pageIndex, perPage) {
+    
+    return {
+      networkName: networkName ? networkName : null,
+      walletAddress: walletAddress ? walletAddress : null,
+      pageIndex: pageIndex ? Number(pageIndex) : null,
+      perPage: perPage ? Number(perPage) : null,
     }
-
-    if (networkName !== undefined) {
-      query["networkName"] = networkName;
-    }
-
-    return query;
+    
   }
 
-  const query = buildHeader(perPage, networkName)
+  const body = JSON.stringify(buildHeader(networkName, null, pageIndex, perPage));
 
-  // console.log("query", query);
+  console.log("query", baseUrls.root + baseUrls[queryFunction]);
 
   // Direct request  
   try {
@@ -42,19 +44,21 @@ export default async function handler(request, response) {
     const res = await fetch(
       baseUrls.root + baseUrls[queryFunction],
       {
-        body: JSON.stringify(query),
-        headers: {
-          "Content-Type": "application/json",
-        },
         method: "POST",
+        headers: {
+          "accept": "application/json",
+          "content-type": "application/json",
+        },
+        body, // body
       })
       .then((res) => res.json());
-    
+    // console.log("res", res);
+    // return response.status(200);
     response.json(res);
   }
   catch (e) {
     response.status(500).json(e);
   }  
 
-  response.status(200)
+  // return response.status(200);
 }

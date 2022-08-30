@@ -1,9 +1,9 @@
 import useSWR from "swr";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { calculateTvlByAssets, TvlByAssetComponent } from "/components/tvlByAsset";
-import rawAssets from "/common/assets.json";
+// import rawAssets from "/common/assets.json";
 
 // Importing dashboard components
 import OneByOne from "/components/OneByOne";
@@ -11,6 +11,7 @@ import TotalTVL from "/components/TotalTVL";
 import WeeklyFees from "/components/WeeklyFees";
 import TransactionList from "/components/TransactionList";
 import TwobyTwoChart from "/components/TwobyTwoChart";
+import { getTxs } from "../framework/get-transactions";
 
 /////////
 // Fetch all portfolios to be shared among components
@@ -40,26 +41,29 @@ function GetTVL () {
   }
 }
 
-// function GetAssets () {
-//   const queryFunction = "get-assets&networkName=polygon";
-//   const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
-
-//   return {
-//     rawAssets: data,
-//     isLoading: !error && !data,
-//     isError: error,
-//   }
-// }
-
-function GetTransactions () {
-  const queryFunction = "get-transactions&perPage=-1";
+function GetAssets () {
+  const queryFunction = "get-assets&networkName=polygon&perPage=-1";
   const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
-  
+
   return {
-    rawTransactionsData: data,
-    isLoadingTransac: !error && !data,
-    isErrorTransac: error,
+    rawAssets: data,
+    isLoading: !error && !data,
+    isError: error,
   }
+}
+
+async function GetTransactions (tempTxsData, setTempTxsData, setTransactionsData, isLoadingTxs, setIsLoadingTxs) {
+  
+  let txs = [];
+  let pageIndex = 0;
+  setTempTxsData([]);
+
+  await getTxs(txs, pageIndex, setIsLoadingTxs, setTransactionsData);
+  
+  console.log(isLoadingTxs, txs);
+  
+  
+
 }
 
 function calculateMetricsFromPortfolios (portfolios, tvl) {
@@ -80,16 +84,16 @@ function calculateMetricsFromPortfolios (portfolios, tvl) {
     // Counting Unique Deposit Addresses (UDAs)
     counts[port.ownerAddress] = 1 + (counts[port.ownerAddress] || 0);
 
-    if (port.cached.value >10) {
+    if (port.value >10) {
       counts_10[port.ownerAddress] = 1 + (counts_10[port.ownerAddress] || 0);
     }
 
     // Summing # of ports on each value threshold
-    if (port.cached.value > 1000) {
+    if (port.value > 1000) {
       port_above_0++;
       port_above_50++;
       port_above_1000++;
-    } else if (port.cached.value > 50) {
+    } else if (port.value > 50) {
       port_above_0++;
       port_above_50++;
     } else {
@@ -143,19 +147,21 @@ function findFeeInUsd (fee, assets) {
 function calculateMetricsFromTransactions(transactions, assets) {
   
   const sumWeeklyFees = [];
-  
-  for (const transac of transactions) {
-    //console.log("intrans", transac);
-    // Determining fees by date
-    if (transac.fees) {
-      for (const fee of transac.fees) {
-        sumWeeklyFees.push({
-          date: setToMonday(new Date(transac.createdOn)), 
-          feeInUsd: findFeeInUsd(fee, assets),
-        });
+  // console.log("transac", transactions);
+  if (transactions) {
+    for (const transac of transactions) {
+      //console.log("intrans", transac);
+      // Determining fees by date
+      if (transac.fees.length > 0) {
+        for (const fee of transac.fees) {
+          sumWeeklyFees.push({
+            date: setToMonday(new Date(transac.executedOn)), 
+            feeInUsd: findFeeInUsd(fee, assets),
+          });
+        }
       }
     }
-  }
+  };
 
   // console.log("fees", sumFees);
 
@@ -177,52 +183,39 @@ function calculateMetricsFromTransactions(transactions, assets) {
 }
 
 export default function App() {
-
-  //const queryFunction = "get-portfolios";
-  //const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
+  const [tempTxsData, setTempTxsData] = useState([]);
+  const [transactionsData, setTransactionsData] = useState([]);
+  const [isLoadingTxs, setIsLoadingTxs] = useState(true);
+  const [weeklyFees, setWeeklyFees] = useState([])
 
   const { rawPortfoliosData, isLoading, error } = GetPortfolios();
-  // console.log("port", rawPortfoliosData);
   const { rawTvlData, isLoadingTVL, errorTVL } = GetTVL();
-  const { rawTransactionsData, isLoadingTransac, isErrorTransac } = GetTransactions();
-  
-  // const { rawAssets,  isLoadingAssets, errorAssets } = GetAssets();
+  const { rawAssets,  isLoadingAssets, errorAssets } = GetAssets();
 
   const loading =
     <div className="relative w-screen h-screen font-mono bg-sky-900 p-10">
       <div className="content-center"><h1 className="animate-pulse text-center text-4xl text-white font-mono mb-10">Loading</h1></div>
     </div>
 
+  useEffect(() => {
+    GetTransactions(tempTxsData, setTempTxsData, setTransactionsData, isLoadingTxs, setIsLoadingTxs);
+  }, []);
+
+  useEffect(() => {
+    console.log("data", transactionsData);
+    setWeeklyFees(calculateMetricsFromTransactions(transactionsData, rawAssets));
+  }, [transactionsData, rawAssets, isLoadingTxs]);
+
   if (error) return <div>failed to load</div>
   if (isLoading) return loading
-  if (error) return <div>failed to load</div>
-  if (isLoadingTransac) return loading
-  // if (isLoadingAssets) return loading
-
-  // Test set for transactions
-  // const transactions = [
-  //   {  
-  //     createdOn: "2022-04-11T03:58:39.000Z",
-  //     fees: [{
-  //       amount: 500000000000000, 
-  //       asset: '48f0325c-e5cc-4dac-9873-793f6c12fe08'
-  //     }]
-  //   },
-  //   {
-  //     createdOn: "2022-04-24T03:58:39.000Z",
-  //     fees: [{
-  //       amount: 1000000000000000, 
-  //       asset: '48f0325c-e5cc-4dac-9873-793f6c12fe08'
-  //     }]
-  //   },
-  // ];
+  if (isLoadingTxs) return loading
+  if (isLoadingAssets) return loading
 
   const { data } = calculateMetricsFromPortfolios(rawPortfoliosData.portfolios, rawTvlData.tvl);
-  const weeklyFees = calculateMetricsFromTransactions(rawTransactionsData.transactions, rawAssets);
   const tvlByAssets = calculateTvlByAssets(rawPortfoliosData.portfolios, rawAssets);
 
   // console.log("tvlByAssets", tvlByAssets);
-  // console.log("fee", weeklyFees);
+  console.log("fee", weeklyFees);
   
   return (
     <div className="relative w-full h-full font-mono bg-sky-900">
@@ -248,7 +241,7 @@ export default function App() {
           <TotalTVL data={data.portfolios} />
           <TvlByAssetComponent data={tvlByAssets} />
           <WeeklyFees data={weeklyFees} />
-          <TransactionList data={rawTransactionsData.transactions}/>
+          <TransactionList data={transactionsData}/>
         </div>
         :
         <div className="mx-auto grid grid-cols-2 lg:grid-cols-6">

@@ -7,11 +7,11 @@ export function calculateTvlByAssets(portfolios, assets) {
     
     // Summing each asset of the portfolio 
     // to the global summed allocation
-    for (const asset of port.cached.allocationData) {
-      if (totalPortofolioAllocationByAsset[asset.asset._id] == undefined) {
-        totalPortofolioAllocationByAsset[asset.asset._id] = parseInt(asset.latestAmount);
+    for (const asset of port.allocation) {
+      if (totalPortofolioAllocationByAsset[asset.assetId] == undefined) {
+        totalPortofolioAllocationByAsset[asset.assetId] = parseInt(asset.amount);
       } else {
-        totalPortofolioAllocationByAsset[asset.asset._id] += parseInt(asset.latestAmount);
+        totalPortofolioAllocationByAsset[asset.assetId] += parseInt(asset.amount);
       }
     }
   }
@@ -25,13 +25,16 @@ export function calculateTvlByAssets(portfolios, assets) {
     try {
       const assetFromTable = assets.find(item => item._id === assetId);
       // console.log("assetTable", assetFromTable);
-      const assetAmount = totalPortofolioAllocationByAsset[assetId] / 
-        (10 ** assetFromTable.decimals);
+      const assetAmount = totalPortofolioAllocationByAsset[assetId];
     
       // TODO: Replace latestPrice for historical price at fee acrrual time
-      const assetInUsd = assetFromTable.latestPrice * assetAmount;
+      const assetInUsd = assetFromTable ? assetFromTable.latestPrice * assetAmount : 0;
+      const assetSymbol = assetFromTable ? assetFromTable.symbol : "";
 
-      tvlByAssets.push({asset: assetId, symbol: assetFromTable.symbol, amountInUsd: assetInUsd})
+      tvlByAssets.push({
+        asset: assetId, 
+        symbol: assetSymbol, 
+        amountInUsd: assetInUsd})
     } catch (error) {
       console.error(error)
     };
@@ -73,7 +76,7 @@ export function TvlByAssetComponent({ data }) {
                 </thead>
                 <tbody className="divide-y divide-sky-800">
                   {largestAssets.map((asset) => (
-                    <tr key={asset.symbol}>
+                    <tr key={asset.asset}>
                       <td className="whitespace-nowrap py-2 pl-4 pr-1 text-sm font-medium text-gray-200 sm:pl-6 md:pl-0">
                         {asset.symbol}
                       </td>

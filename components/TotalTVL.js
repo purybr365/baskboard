@@ -15,7 +15,7 @@ function TotalTVL( { data } ) {
 
     const portDate = portfolios[portId].createdOn.substring(0, 10);
     
-    const portTVL = portfolios[portId].cached.value;
+    const portTVL = portfolios[portId].value;
     //console.log("data", portDate, "tvl", portTVL);
     
     rawTVL.push({date: portDate, TVL: portTVL});
