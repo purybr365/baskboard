@@ -34,15 +34,19 @@ function relativeDate(dateString) {
 }
 
 export default function TransactionList ({ data }) {
-  const typeOfEvent = {
-    "DEFIBASKET_EDIT": {event: "edit", color: "bg-yellow-100 text-yellow-800"},
-    "DEFIBASKET_CREATE": {event: "create", color: "bg-green-100 text-green-800"},
-    "DEFIBASKET_WITHDRAW": {event: "withdraw", color: "bg-red-100 text-red-800"},
-    "DEFIBASKET_DEPOSIT": {event: "deposit", color: "bg-blue-100 text-blue-800"},
-    "Transfer": {event: "transfer", color: "bg-blue-100 text-blue-800"},
-  };
+  if (!data) return <></>;
 
-  const sortedTransactions = data.sort((a,b) => (a.createdOn < b.createdOn) ? 1 : -1);
+  const typeOfEvent = {
+    "editPortfolio": {event: "edit", color: "bg-yellow-100 text-yellow-800"},
+    "createPortfolio": {event: "create", color: "bg-green-100 text-green-800"},
+    "withdrawPortfolio": {event: "withdraw", color: "bg-red-100 text-red-800"},
+    "depositPortfolio": {event: "deposit", color: "bg-blue-100 text-blue-800"},
+    // "Transfer": {event: "transfer", color: "bg-blue-100 text-blue-800"},
+    // undefined: {event: "UNKNOWN", color: "bg-blue-100 text-blue-800"},
+  };
+  
+  // console.log("TL", data);
+  const sortedTransactions = data.sort((a,b) => (a.executedOn < b.executedOn) ? 1 : -1);
 
   // TODO -> include helper fields in the transactions list: 
   // status (IN/OUT), type (create, edit, withdraw)
@@ -72,17 +76,18 @@ export default function TransactionList ({ data }) {
                 </thead>
                 <tbody className="divide-y divide-sky-800">
                   {sortedTransactions.map((transaction) => (
-                    <tr key={transaction}>
+                    <tr key={transaction._id}>
                       <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm font-medium text-gray-200 sm:pl-6 md:pl-0">
                         <Tooltip title="Click to PolygonScan" placement="top" arrow>
                           <a href={"https://polygonscan.com/tx/" + transaction.txHash} target="_blank" rel="noreferrer">
-                            <span className={"inline-flex items-center px-2 py-0.5 rounded text-xs font-medium " + typeOfEvent[transaction.mainEventName].color}>
-                              {typeOfEvent[transaction.mainEventName].event}
+                            <span className={"inline-flex items-center px-2 py-0.5 rounded text-xs font-medium "}>
+                              {/* // typeOfEvent[transaction.functionName] !== undefined ? typeOfEvent[transaction.functionName].color : transaction.functionName}> */}
+                                {transaction.functionName}
                             </span>
                           </a>
                         </Tooltip>
                       </td>
-                      <td className="whitespace-nowrap py-2 px-3 text-left text-sm text-gray-200">{relativeDate(transaction.createdOn)}</td>
+                      <td className="whitespace-nowrap py-2 px-3 text-left text-sm text-gray-200">{relativeDate(transaction.executedOn)}</td>
                       <td className="whitespace-nowrap py-2 px-3 text-left text-sm text-gray-200">{transaction.nftId}</td>
                     </tr>
                   ))}

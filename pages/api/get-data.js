@@ -20,7 +20,7 @@ export default async function handler(request, response) {
     queryFunction,
     perPage,
     networkName,
-    walletAddress,
+    pageIndex,
   } = await request.query;
 
   function buildHeader(networkName, walletAddress, pageIndex, perPage) {
@@ -28,13 +28,13 @@ export default async function handler(request, response) {
     return {
       networkName: networkName ? networkName : null,
       walletAddress: walletAddress ? walletAddress : null,
-      pageIndex: pageIndex ? pageIndex : null,
+      pageIndex: pageIndex ? Number(pageIndex) : null,
       perPage: perPage ? Number(perPage) : null,
     }
     
   }
 
-  const body = JSON.stringify(buildHeader(networkName, null, null, perPage));
+  const body = JSON.stringify(buildHeader(networkName, null, pageIndex, perPage));
 
   console.log("query", baseUrls.root + baseUrls[queryFunction]);
 
