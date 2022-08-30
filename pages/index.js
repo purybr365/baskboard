@@ -59,10 +59,6 @@ async function GetTransactions (tempTxsData, setTempTxsData, setTransactionsData
   setTempTxsData([]);
 
   await getTxs(txs, pageIndex, setIsLoadingTxs, setTransactionsData);
-  
-  console.log(isLoadingTxs, txs);
-  
-  
 
 }
 
@@ -202,7 +198,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    console.log("data", transactionsData);
+    // console.log("data", transactionsData);
     setWeeklyFees(calculateMetricsFromTransactions(transactionsData, rawAssets));
   }, [transactionsData, rawAssets, isLoadingTxs]);
 
@@ -215,7 +211,7 @@ export default function App() {
   const tvlByAssets = calculateTvlByAssets(rawPortfoliosData.portfolios, rawAssets);
 
   // console.log("tvlByAssets", tvlByAssets);
-  console.log("fee", weeklyFees);
+  // console.log("fee", weeklyFees);
   
   return (
     <div className="relative w-full h-full font-mono bg-sky-900">

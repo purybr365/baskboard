@@ -36,7 +36,7 @@ export default async function handler(request, response) {
 
   const body = JSON.stringify(buildHeader(networkName, null, pageIndex, perPage));
 
-  console.log("query", baseUrls.root + baseUrls[queryFunction]);
+  // console.log("query", baseUrls.root + baseUrls[queryFunction]);
 
   // Direct request  
   try {

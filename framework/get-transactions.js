@@ -24,10 +24,10 @@ export async function getTxs(txs, pageIndex=0, setIsLoadingTxs, setTransactionsD
   console.log(txs.length);
   if (res.pagination.hasNext) {
     pageIndex++;
-    console.log("page",pageIndex);
+    // console.log("page",pageIndex);
     await getTxs(txs, pageIndex, setIsLoadingTxs, setTransactionsData);
   } else {
-    console.log("CHEGOU");
+    // console.log("CHEGOU");
     setIsLoadingTxs(false);
     setTransactionsData(txs);
     // return {
