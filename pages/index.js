@@ -152,7 +152,7 @@ function calculateMetricsFromTransactions(transactions, assets) {
         for (const fee of transac.fees) {
           sumWeeklyFees.push({
             date: setToMonday(new Date(transac.executedOn)), 
-            feeInUsd: findFeeInUsd(fee, assets),
+            feeInUsd: fee.value,
           });
         }
       }
@@ -200,6 +200,7 @@ export default function App() {
   useEffect(() => {
     // console.log("data", transactionsData);
     setWeeklyFees(calculateMetricsFromTransactions(transactionsData, rawAssets));
+    console.log("fess", weeklyFees);
   }, [transactionsData, rawAssets, isLoadingTxs]);
 
   if (error) return <div>failed to load</div>
@@ -217,13 +218,13 @@ export default function App() {
     <div className="relative w-full h-full font-mono bg-sky-900">
       <Head>
         <title>Baskboard</title>
-        <meta name="description" content="The ultimate DeFi Basket dashboard" />
+        <meta name="description" content="The ultimate Picnic dashboard" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
       <main className="p-5 pt-10 mx-auto">
         <h1 className="text-center text-4xl text-white font-mono mb-10">
-          DeFi Basket Dashboard
+          Picnic Dashboard
         </h1>
         {!data.error ? 
         <div className="mx-auto grid grid-cols-2 lg:grid-cols-6">
