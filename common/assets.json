@@ -4606,7 +4606,7 @@
   },
   {
     "_id": "7e81d4ac-4d90-4f4d-ae40-cab154e272b2",
-    "active": false,
+    "active": true,
     "address": "0x5c4b7CCBF908E64F32e12c6650ec0C96d717f03F",
     "color": "#f4bc2c",
     "decimals": 18,
@@ -7355,7 +7355,7 @@
     "rawLogoUri": "/asset-logos/366efbaa-66b8-43ae-9afc-c12bc48cbcee.png",
     "symbol": "CEL",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "27f017c5-3f8d-4154-a354-746816538a04",
@@ -7824,7 +7824,7 @@
     "rawLogoUri": "/asset-logos/263baedc-9aca-4b01-9994-0d775ad85d1e.jpg",
     "symbol": "TECH",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "e8104bde-856c-4781-96f1-67b1fe40880f",
@@ -11345,7 +11345,7 @@
     "rawLogoUri": "/asset-logos/8e7af83a-3c6a-44da-a277-5309dffdfdfa.png",
     "symbol": "DSLA",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "2f8c199b-4126-47c2-908c-b6fb9bd2e7b3",
@@ -12122,7 +12122,7 @@
     "rawLogoUri": "/asset-logos/b934ce7e-f424-44a4-901d-03f1ec507ebe.png",
     "symbol": "ETHA",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "9d3727ef-6028-4152-9a81-a959df8dcd7b",
@@ -12311,7 +12311,7 @@
     "rawLogoUri": "/asset-logos/4915a6c7-874c-4065-ad69-3bfa63665f11.png",
     "symbol": "ERN",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "4c94db44-2bde-4b07-9ac8-c3f27956fcab",
@@ -12632,7 +12632,7 @@
     "rawLogoUri": "/asset-logos/ce3effcc-123b-4400-9782-a14c70daf548.png",
     "symbol": "FEAR",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "b97900df-c676-408c-a8db-46291600dca8",
@@ -14447,7 +14447,7 @@
   },
   {
     "_id": "35ebd2f8-a863-4694-b29e-cf60e1ef6ee8",
-    "active": false,
+    "active": true,
     "address": "0xA731349fa468614c1698fc46ebf06Da6F380239e",
     "color": "#2ca4e4",
     "decimals": 18,
@@ -14924,27 +14924,6 @@
     "category": ["Stablecoin"]
   },
   {
-    "_id": "caa841ab-bf0f-4647-a0ff-2ce8dff323e6",
-    "active": false,
-    "address": "0xbD1463F02f61676d53fd183C2B19282BFF93D099",
-    "color": "#000000",
-    "decimals": 18,
-    "logos": [
-      {
-        "logoUri": "",
-        "name": "Jarvis Synthetic Swiss Franc",
-        "symbol": "jCHF",
-        "color": "#000000"
-      }
-    ],
-    "name": "Jarvis Synthetic Swiss Franc",
-    "networkName": "polygon",
-    "rawLogoUri": "",
-    "symbol": "jCHF",
-    "type": "token",
-    "visible": false
-  },
-  {
     "_id": "3ed9780e-8d20-4f1d-875d-e4142dd0f36d",
     "active": false,
     "address": "0x813E6A5f31C95F7c5f9982B1FDc6C69610bEab4A",
@@ -15211,7 +15190,7 @@
     "rawLogoUri": "/asset-logos/3498b499-3b70-4e83-8e6e-d60fc093cd9a.png",
     "symbol": "KOM",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "51732840-7c0d-41b8-b2f6-c5e28ebc9630",
@@ -17975,7 +17954,7 @@
     "rawLogoUri": "/asset-logos/20979196-88df-4fd7-ba95-a8b412d9c1ff.png",
     "symbol": "O3",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "962fa3f9-3d3b-4b35-b39f-9c29ad3f4e18",
@@ -20697,7 +20676,7 @@
     "rawLogoUri": "/asset-logos/f989dcf8-7254-4b02-869e-ba105339272b.png",
     "symbol": "REVV",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "1bccda31-244c-43fb-a158-b66d2688108e",
@@ -22728,7 +22707,7 @@
     "rawLogoUri": "/asset-logos/ba44052c-fe9a-47d4-8b12-4ea524808bcd.png",
     "symbol": "SNK",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "eb343c18-f7b5-4197-94e2-b4941b14d7a1",
@@ -22833,7 +22812,7 @@
     "rawLogoUri": "/asset-logos/2bb04b67-dfed-40eb-921c-f1e36c2ea06a.jpg",
     "symbol": "SX",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "b6c898bd-d898-4281-afaf-ea9daee7f8a0",
@@ -22875,7 +22854,7 @@
     "rawLogoUri": "/asset-logos/819b9d1d-4885-4282-8f16-2be871c859c2.webp",
     "symbol": "SDT",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "d21331f3-3db3-40e9-b972-ffddc5a6a795",
@@ -23148,7 +23127,7 @@
     "rawLogoUri": "/asset-logos/0cd75561-8f74-471b-8ae4-256143fdbaff.png",
     "symbol": "SUSHI",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "43804aa8-381f-4b74-b874-50de4daf9314",
@@ -24524,7 +24503,7 @@
     "rawLogoUri": "/asset-logos/d6c476a2-7322-439b-99ab-479b8b6d7d53.png",
     "symbol": "BCT",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "7cb7b041-000f-433f-a46d-bffdeacb6374",
@@ -60566,7 +60545,7 @@
     "rawLogoUri": "/asset-logos/41f30848-c9ae-47a7-91ab-97e722144913.svg",
     "symbol": "WOO",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "1eb909d2-55b2-4aa6-b1c9-120d54671b35",
@@ -60767,7 +60746,7 @@
   },
   {
     "_id": "98b8ff51-465c-4172-beb4-42810ec7df68",
-    "active": false,
+    "active": true,
     "address": "0x24834BBEc7E39ef42f4a75EAF8E5B6486d3F0e57",
     "color": "#df6a2f",
     "decimals": 18,
@@ -61528,7 +61507,7 @@
     "rawLogoUri": "/asset-logos/fdaa23f1-d85e-494f-9370-671a5b045160.png",
     "symbol": "YEL",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "501a1214-0bda-4b11-b394-079d5544c432",
@@ -62561,7 +62540,7 @@
     "rawLogoUri": "/asset-logos/733806ed-7652-42bd-a103-2a5435b094e4.png",
     "symbol": "iFARM",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "65b98bcb-0d1f-4093-a3dc-dd7dfe651690",
@@ -65197,7 +65176,7 @@
   },
   {
     "_id": "efb07755-a2d3-40f4-9b17-dd1db64b84c7",
-    "active": false,
+    "active": true,
     "address": "0xC2d95EEF97Ec6C17551d45e77B590dc1F9117C67",
     "callParams": {
       "poolAddress": "0xC2d95EEF97Ec6C17551d45e77B590dc1F9117C67"
@@ -70504,7 +70483,7 @@
     "active": true,
     "address": "0x1C954E8fe737F99f68Fa1CCda3e51ebDB291948C",
     "color": "#3ccca0",
-    "decimals": 6,
+    "decimals": 18,
     "logos": [
       {
         "logoUri": "/asset-logos/92709729-bdc6-43fd-a2d1-1fe1a4788ed0.png",
@@ -70518,7 +70497,7 @@
     "rawLogoUri": "/asset-logos/92709729-bdc6-43fd-a2d1-1fe1a4788ed0.png",
     "symbol": "KNC",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "a4c294f1-5cb0-431a-9df7-ac2f784e9449",
@@ -73603,7 +73582,7 @@
     "rawLogoUri": "/asset-logos/063ed170-818a-436a-820b-a45c7e8a6939.png",
     "symbol": "jCOP",
     "type": "IJarvisV6Mint",
-    "visible": true,
+    "visible": false,
     "category": ["Stablecoin"]
   },
   {
@@ -74189,7 +74168,7 @@
     "rawLogoUri": "/asset-logos/38dbce24-cbb8-4266-97ce-76b13f249905.png",
     "symbol": "PYR",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "07e4cf03-a268-432c-80cf-373c3645a8db",
@@ -74706,7 +74685,7 @@
     "networkName": "polygon",
     "symbol": "BIFI",
     "type": "IBeefyDeposit",
-    "visible": true,
+    "visible": false,
     "category": ["Yield"]
   },
   {
@@ -75356,7 +75335,7 @@
     "symbol": "USDC/MAI",
     "type": "IBeefyDeposit",
     "visible": true,
-    "notes": "Beefy charges a deposit fee of 0.5% on this vault",
+    "notes": "Deposit fee: 0.5%",
     "category": ["Yield", "Liquidity Pool", "No impermanent loss", "Stablecoin"]
   },
   {
@@ -76496,7 +76475,7 @@
     "address": "0xB0D20b7d047e10a8Af2bE8C7c4C976653A0f2ECA",
     "latestPrice": 1,
     "active": true,
-    "visible": true,
+    "visible": false,
     "networkName": "polygon",
     "type": "IBeefyDeposit",
     "contractName": "BeefyDepositBridge",
@@ -76531,7 +76510,7 @@
     "address": "0x755e426A8B445eAE53b1c051c1E7acA7381fCDb7",
     "latestPrice": 1,
     "active": true,
-    "visible": true,
+    "visible": false,
     "networkName": "polygon",
     "type": "IBeefyDeposit",
     "contractName": "BeefyDepositBridge",
@@ -76682,7 +76661,7 @@
     "rawLogoUri": "/asset-logos/9b921908-dce7-4f32-b0ed-f04749abfcc2.png",
     "symbol": "STG",
     "type": "token",
-    "visible": true
+    "visible": false
   },
   {
     "_id": "1a61d69f-1ab9-4262-a938-00b2b9355e01",
@@ -76908,5 +76887,920 @@
     "symbol": "PAXG",
     "type": "token",
     "visible": true
+  },
+  {
+    "_id": "7972f369-4159-41e4-89f2-f7ed04cabd61",
+    "active": true,
+    "address": "0x5eF12a086B8A61C0f11a72b36b5EF451FA17f1f1",
+    "color": "#000000",
+    "decimals": 18,
+    "logos": [
+      {
+        "logoUri": "/asset-logos/eb84598f-9e6f-4a7c-a765-c78adcd74dc3.png",
+        "name": "JRTFutures (JRT-NOV22)",
+        "symbol": "JRT-NOV22",
+        "color": "#000000"
+      }
+    ],
+    "name": "JRTFutures (JRT-NOV22)",
+    "networkName": "polygon",
+    "rawLogoUri": "/asset-logos/eb84598f-9e6f-4a7c-a765-c78adcd74dc3.png",
+    "symbol": "JRT-NOV22",
+    "type": "token",
+    "visible": false
+  },
+  {
+    "_id": "b732af65-6a6e-47c5-8548-c156a3ecb750",
+    "active": false,
+    "address": "0x68Fd822a2Bda3dB31fFfA68089696ea4e55A9D36",
+    "color": "#00b2f9",
+    "contractName": "KyberLiquidityBridge",
+    "decimals": 18,
+    "linkedAssets": [
+      {
+        "assetId": "e251ecf6-48c2-4538-afcd-fbb92424054d",
+        "fraction": 1
+      },
+      {
+        "assetId": "7972f369-4159-41e4-89f2-f7ed04cabd61",
+        "fraction": 0
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/e251ecf6-48c2-4538-afcd-fbb92424054d.png",
+        "name": "USD Coin",
+        "symbol": "USDC",
+        "color": "#2775ca"
+      },
+      {
+        "logoUri": "/asset-logos/eb84598f-9e6f-4a7c-a765-c78adcd74dc3.png",
+        "name": "JRT Futures (JRT-NOV22)",
+        "symbol": "JRT-NOV22",
+        "color": "#000000"
+      }
+    ],
+    "name": "USDC/JRT-NOV22",
+    "networkName": "polygon",
+    "retired": false,
+    "symbol": "USDC/JRT-NOV22",
+    "type": "IKyberLiquidity",
+    "visible": false
+  },
+  {
+    "_id": "394c5408-378c-427a-b801-5160bd3c20f9",
+    "active": true,
+    "address": "0x4Fd52587194a0bfd3AC5b8096D15e1a7230bA2eb",
+    "color": "#000000",
+    "decimals": 18,
+    "logos": [
+      {
+        "logoUri": "/asset-logos/eb84598f-9e6f-4a7c-a765-c78adcd74dc3.png",
+        "name": "JRT-MIMO-NOV22",
+        "symbol": "JRT-MIMO-NOV22",
+        "color": "#000000"
+      }
+    ],
+    "name": "JRT-MIMO-NOV22",
+    "networkName": "polygon",
+    "rawLogoUri": "/asset-logos/eb84598f-9e6f-4a7c-a765-c78adcd74dc3.png",
+    "symbol": "JRT-MIMO-NOV22",
+    "type": "token",
+    "visible": false
+  },
+  {
+    "_id": "d5465a55-c307-421c-bd4b-1094a1e6f8c6",
+    "active": true,
+    "address": "0x946bE3eCAebaA3fe2eBb73864ab555A8cfdF49Fd",
+    "color": "#00b2f9",
+    "contractName": "KyberLiquidityBridge",
+    "decimals": 18,
+    "linkedAssets": [
+      {
+        "assetId": "de06ed50-ddf1-4c54-9590-176eae38d5e3",
+        "fraction": 1
+      },
+      {
+        "assetId": "394c5408-378c-427a-b801-5160bd3c20f9",
+        "fraction": 0
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/a4c294f1-5cb0-431a-9df7-ac2f784e9449.png",
+        "name": "Jarvis Synthetic Euro",
+        "symbol": "jEUR",
+        "color": "#04349b"
+      },
+      {
+        "logoUri": "/asset-logos/eb84598f-9e6f-4a7c-a765-c78adcd74dc3.png",
+        "name": "JRT-MIMO-NOV22",
+        "symbol": "JRT-MIMO-NOV22",
+        "color": "#000000"
+      }
+    ],
+    "name": "[PAR/jEUR]/JRT-MIMO-NOV22",
+    "networkName": "polygon",
+    "retired": false,
+    "symbol": "[PAR/jEUR]/JRT-MIMO-NOV22",
+    "type": "IKyberLiquidity",
+    "visible": false
+  },
+  {
+    "_id": "38afd5a3-b20d-4696-98b3-7c72765e1454",
+    "active": true,
+    "address": "0x63B87304fc9889Ce7356396ea959aA64850a52E7",
+    "color": "#000000",
+    "decimals": 18,
+    "logos": [
+      {
+        "logoUri": "/asset-logos/eb84598f-9e6f-4a7c-a765-c78adcd74dc3.png",
+        "name": "JRTFutures (JRT-ANGLE-NOV22)",
+        "symbol": "JRT-ANGLE-NOV22",
+        "color": "#000000"
+      }
+    ],
+    "name": "JRTFutures (JRT-ANGLE-NOV22)",
+    "networkName": "polygon",
+    "rawLogoUri": "/asset-logos/eb84598f-9e6f-4a7c-a765-c78adcd74dc3.png",
+    "symbol": "JRT-ANGLE-NOV22",
+    "type": "token",
+    "visible": false
+  },
+  {
+    "_id": "ca382abb-bf36-431d-aa4a-94a7e69cf40c",
+    "active": true,
+    "address": "0x4D44f653B885fbddF486a71508Afd63071ca1A6E",
+    "color": "#00b2f9",
+    "contractName": "KyberLiquidityBridge",
+    "decimals": 18,
+    "linkedAssets": [
+      {
+        "assetId": "d05921ce-17d8-4084-9123-b88efba30801",
+        "fraction": 1
+      },
+      {
+        "assetId": "38afd5a3-b20d-4696-98b3-7c72765e1454",
+        "fraction": 0
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/eb84598f-9e6f-4a7c-a765-c78adcd74dc3.png",
+        "name": "JRTFutures (JRT-ANGLE-NOV22)",
+        "symbol": "JRT-ANGLE-NOV22",
+        "color": "#000000"
+      },
+      {
+        "logoUri": "/asset-logos/a4c294f1-5cb0-431a-9df7-ac2f784e9449.png",
+        "name": "Jarvis Synthetic Euro",
+        "symbol": "jEUR",
+        "color": "#04349b"
+      }
+    ],
+    "name": "[agEUR/jEUR]/JRT-ANGLE-NOV22",
+    "networkName": "polygon",
+    "retired": false,
+    "symbol": "[agEUR/jEUR]/JRT-ANGLE-NOV22",
+    "type": "IKyberLiquidity",
+    "visible": false
+  },
+  {
+    "_id": "4b544ae9-4c01-4ff8-a33d-70b8715fd951",
+    "active": true,
+    "address": "0x18ec0A6E18E5bc3784fDd3a3634b31245ab704F6",
+    "callParams": {
+      "jToken": "a4c294f1-5cb0-431a-9df7-ac2f784e9449"
+    },
+    "color": "#fa2649",
+    "decimals": 18,
+    "logos": [
+      {
+        "logoUri": "/asset-logos/a4c294f1-5cb0-431a-9df7-ac2f784e9449.png",
+        "name": "Jarvis Synthetic Euro",
+        "symbol": "jEUR",
+        "color": "#04349b"
+      }
+    ],
+    "name": "Monerium EUR",
+    "networkName": "polygon",
+    "rawLogoUri": "/asset-logos/4b544ae9-4c01-4ff8-a33d-70b8715fd951.png",
+    "symbol": "EURe",
+    "type": "IlliquidStable",
+    "visible": false,
+    "category": ["Stablecoin"]
+  },
+  {
+    "_id": "a6db7328-e207-47f3-a3ec-89858b34e451",
+    "active": true,
+    "address": "0x2F3E9CA3bFf85B91D9fe6a9f3e8F9B1A6a4c3cF4",
+    "callParams": {
+      "poolAddress": "0x2F3E9CA3bFf85B91D9fe6a9f3e8F9B1A6a4c3cF4"
+    },
+    "color": "#4a3f81",
+    "contractName": "CurveLiquidityBridge",
+    "decimals": 18,
+    "linkedAssets": [
+      {
+        "assetId": "4b544ae9-4c01-4ff8-a33d-70b8715fd951",
+        "fraction": 0
+      },
+      {
+        "assetId": "a4c294f1-5cb0-431a-9df7-ac2f784e9449",
+        "fraction": 1
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/a4c294f1-5cb0-431a-9df7-ac2f784e9449.png",
+        "name": "Jarvis Synthetic Euro",
+        "symbol": "jEUR",
+        "color": "#4a3f81"
+      }
+    ],
+    "name": "EURe/jEUR",
+    "networkName": "polygon",
+    "symbol": "EURe/jEUR",
+    "type": "ICurveLiquidity",
+    "visible": false,
+    "category": ["Liquidity Pool", "Stablecoin", "No impermanent loss"]
+  },
+  {
+    "_id": "1be6195c-ed46-462d-926d-f534c57c39f0",
+    "active": true,
+    "address": "0x3c39B74025Ed89F060CFa53E06C2827a34e093A4",
+    "callParams": {
+      "poolAddress": "0xBb7Ae170791d617d9BEc6196c63a7CF8EEFF6087"
+    },
+    "color": "#4a3f81",
+    "contractName": "HarvestDepositBridge",
+    "decimals": 18,
+    "linkedAssets": [
+      {
+        "assetId": "a6db7328-e207-47f3-a3ec-89858b34e451",
+        "fraction": 1
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/a4c294f1-5cb0-431a-9df7-ac2f784e9449.png",
+        "name": "Jarvis Synthetic Euro",
+        "symbol": "jEUR",
+        "color": "#4a3f81"
+      }
+    ],
+    "name": "EURe/jEUR",
+    "networkName": "polygon",
+    "symbol": "EURe/jEUR",
+    "type": "IHarvestDeposit",
+    "visible": true,
+    "category": ["Yield", "Liquidity Pool", "No impermanent loss", "Stablecoin"]
+  },
+  {
+    "_id": "eba8e94a-6ae1-4213-b886-9da239174bf8",
+    "active": true,
+    "address": "0xE17e6EfbD0064992D1E4e9a4641f30e40be208a0",
+    "callParams": {
+      "poolAddress": "0xE17e6EfbD0064992D1E4e9a4641f30e40be208a0"
+    },
+    "color": "#00b2f9",
+    "contractName": "HarvestDepositBridge",
+    "decimals": 18,
+    "linkedAssets": [
+      {
+        "assetId": "b732af65-6a6e-47c5-8548-c156a3ecb750",
+        "fraction": 1
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/eb84598f-9e6f-4a7c-a765-c78adcd74dc3.png",
+        "name": "JRT Futures (JRT-NOV22)",
+        "symbol": "JRT-SEP22",
+        "color": "#000000"
+      },
+      {
+        "logoUri": "/asset-logos/a4c294f1-5cb0-431a-9df7-ac2f784e9449.png",
+        "name": "Jarvis Synthetic Euro",
+        "symbol": "jEUR",
+        "color": "#04349b"
+      }
+    ],
+    "name": "USDC/JRT-NOV22",
+    "networkName": "polygon",
+    "retired": false,
+    "symbol": "USDC/JRT-NOV22",
+    "type": "IHarvestDeposit",
+    "visible": false
+  },
+  {
+    "_id": "3178b451-c2f5-4869-93a6-a2122cbcf667",
+    "active": true,
+    "address": "0xd2C0B08d64D5Edf4ec320807C6a2C12F37840c99",
+    "callParams": {
+      "poolAddress": "0xd2C0B08d64D5Edf4ec320807C6a2C12F37840c99"
+    },
+    "color": "#00b2f9",
+    "contractName": "HarvestDepositBridge",
+    "decimals": 18,
+    "linkedAssets": [
+      {
+        "assetId": "ca382abb-bf36-431d-aa4a-94a7e69cf40c",
+        "fraction": 1
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/eb84598f-9e6f-4a7c-a765-c78adcd74dc3.png",
+        "name": "JRTFutures (JRT-ANGLE-NOV22)",
+        "symbol": "JRT-ANGLE-NOV22",
+        "color": "#000000"
+      },
+      {
+        "logoUri": "/asset-logos/a4c294f1-5cb0-431a-9df7-ac2f784e9449.png",
+        "name": "Jarvis Synthetic Euro",
+        "symbol": "jEUR",
+        "color": "#04349b"
+      }
+    ],
+    "name": "[agEUR/jEUR]/JRT-ANGLE-NOV22",
+    "networkName": "polygon",
+    "retired": false,
+    "symbol": "[agEUR/jEUR]/JRT-ANGLE-NOV22",
+    "type": "IHarvestDeposit",
+    "visible": false
+  },
+  {
+    "_id": "a372c485-b416-4a0e-b9bb-bc0637606f6f",
+    "active": true,
+    "address": "0xF67d5e775C76E1631ea33D9977A02EccD7316a4C",
+    "callParams": {
+      "poolAddress": "0xF67d5e775C76E1631ea33D9977A02EccD7316a4C"
+    },
+    "color": "#00b2f9",
+    "contractName": "HarvestDepositBridge",
+    "decimals": 18,
+    "linkedAssets": [
+      {
+        "assetId": "d5465a55-c307-421c-bd4b-1094a1e6f8c6",
+        "fraction": 1
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/eb84598f-9e6f-4a7c-a765-c78adcd74dc3.png",
+        "name": "JRT-MIMO-NOV22",
+        "symbol": "JRT-MIMO-NOV22",
+        "color": "#000000"
+      },
+      {
+        "logoUri": "/asset-logos/a4c294f1-5cb0-431a-9df7-ac2f784e9449.png",
+        "name": "Jarvis Synthetic Euro",
+        "symbol": "jEUR",
+        "color": "#04349b"
+      }
+    ],
+    "name": "[PAR/jEUR]/JRT-MIMO-NOV22",
+    "networkName": "polygon",
+    "retired": false,
+    "symbol": "[PAR/jEUR]/JRT-MIMO-NOV22",
+    "type": "IHarvestDeposit",
+    "visible": false
+  },
+  {
+    "_id": "f844f9d3-d224-4ad0-a471-82b6785e6d15",
+    "active": true,
+    "address": "0x58a3e6d5501180fb9fcE7cFC2368F9Dc5e186A6f",
+    "color": "#4a3f81",
+    "contractName": "BeefyDepositBridge",
+    "decimals": 18,
+    "linkedAssets": [
+      {
+        "assetId": "a6db7328-e207-47f3-a3ec-89858b34e451",
+        "fraction": 1
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/a4c294f1-5cb0-431a-9df7-ac2f784e9449.png",
+        "name": "Jarvis Synthetic Euro",
+        "symbol": "jEUR",
+        "color": "#4a3f81"
+      }
+    ],
+    "name": "EURe/jEUR",
+    "networkName": "polygon",
+    "symbol": "EURe/jEUR",
+    "type": "IBeefyDeposit",
+    "visible": true,
+    "category": ["Yield", "Liquidity Pool", "No impermanent loss", "Stablecoin"]
+  },
+  {
+    "_id": "cb1a1773-8e7f-43f9-9415-c1a61ac76366",
+    "active": true,
+    "address": "0xbD1463F02f61676d53fd183C2B19282BFF93D099",
+    "callParams": {
+      "poolAddress": "0x8734CF40A402D4191BD4D7a64bEeF12E4c452DeF",
+      "oracleAddress": "0xc76f762CedF0F78a439727861628E0fdfE1e70c2"
+    },
+    "color": "#dc0527",
+    "contractName": "JarvisV6MintBridge",
+    "decimals": 18,
+    "depositable": true,
+    "linkedAssets": [
+      {
+        "assetId": "e251ecf6-48c2-4538-afcd-fbb92424054d",
+        "fraction": 1
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/cb1a1773-8e7f-43f9-9415-c1a61ac76366.png",
+        "name": "Jarvis Synthetic Swiss Franc",
+        "symbol": "jCHF",
+        "color": "#dc0527"
+      }
+    ],
+    "name": "Jarvis Synthetic Swiss Franc",
+    "networkName": "polygon",
+    "rawLogoUri": "/asset-logos/cb1a1773-8e7f-43f9-9415-c1a61ac76366.png",
+    "symbol": "jCHF",
+    "type": "IJarvisV6Mint",
+    "visible": true,
+    "category": ["Stablecoin"]
+  },
+  {
+    "_id": "67fdd203-c8f5-4ea9-a55c-a7439fb1c389",
+    "active": true,
+    "address": "0x8159462d255C1D24915CB51ec361F700174cD994",
+    "callParams": {
+      "poolId": "0x8159462d255c1d24915cb51ec361f700174cd99400000000000000000000075d",
+      "vaultAddress": "0xBA12222222228d8Ba445958a75a0704d566BF2C8"
+    },
+    "color": "#468af0",
+    "contractName": "BalancerLiquidityBridge",
+    "decimals": 18,
+    "linkedAssets": [
+      {
+        "assetId": "d604439e-d464-4df5-bed1-66815b348cab",
+        "fraction": 0.5
+      },
+      {
+        "assetId": "d21331f3-3db3-40e9-b972-ffddc5a6a795",
+        "fraction": 0.5
+      },
+      {
+        "assetId": "67fdd203-c8f5-4ea9-a55c-a7439fb1c389",
+        "fraction": 0
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/d604439e-d464-4df5-bed1-66815b348cab.png",
+        "name": "Wrapped Matic",
+        "symbol": "WMATIC",
+        "color": "#468af0"
+      },
+      {
+        "logoUri": "/asset-logos/d21331f3-3db3-40e9-b972-ffddc5a6a795.png",
+        "name": "Staked MATIC (PoS)",
+        "symbol": "stMATIC",
+        "color": "#000000"
+      }
+    ],
+    "name": "WMATIC/stMATIC",
+    "networkName": "polygon",
+    "symbol": "WMATIC/stMATIC",
+    "type": "IBalancerLiquidity",
+    "visible": false,
+    "category": ["Liquidity Pool"]
+  },
+  {
+    "_id": "273e060f-889f-4ce1-bb66-a272d3a881e3",
+    "active": true,
+    "address": "0xb20fC01D21A50d2C734C4a1262B4404d41fA7BF0",
+    "callParams": {
+      "poolId": "0xb20fc01d21a50d2c734c4a1262b4404d41fa7bf000000000000000000000075c",
+      "vaultAddress": "0xBA12222222228d8Ba445958a75a0704d566BF2C8"
+    },
+    "color": "#468af0",
+    "contractName": "BalancerLiquidityBridge",
+    "decimals": 18,
+    "linkedAssets": [
+      {
+        "assetId": "d604439e-d464-4df5-bed1-66815b348cab",
+        "fraction": 0.5
+      },
+      {
+        "assetId": "8634b650-20fe-4f9e-8310-6672b38ea0ce",
+        "fraction": 0.5
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/d604439e-d464-4df5-bed1-66815b348cab.png",
+        "name": "Wrapped Matic",
+        "symbol": "WMATIC",
+        "color": "#468af0"
+      },
+      {
+        "logoUri": "/asset-logos/8634b650-20fe-4f9e-8310-6672b38ea0ce.png",
+        "name": "MaticX",
+        "symbol": "MaticX",
+        "color": "#000000"
+      }
+    ],
+    "name": "WMATIC/MaticX",
+    "networkName": "polygon",
+    "symbol": "WMATIC/MaticX",
+    "type": "IBalancerLiquidity",
+    "visible": false,
+    "category": ["Liquidity Pool"]
+  },
+  {
+    "_id": "67b7ffa2-b151-4c20-bfdf-158b212ad22a",
+    "color": "#468af0",
+    "decimals": 18,
+    "address": "0x42Cbb13EC7b35AA76D5fE7B0A446fA7B64F7086A",
+    "latestPrice": 1,
+    "active": true,
+    "visible": false,
+    "type": "IBeefyDeposit",
+    "contractName": "BeefyDepositBridge",
+    "logos": [
+      {
+        "logoUri": "/asset-logos/d604439e-d464-4df5-bed1-66815b348cab.png",
+        "name": "Wrapped Matic",
+        "symbol": "WMATIC",
+        "color": "#468af0"
+      },
+      {
+        "logoUri": "/asset-logos/8634b650-20fe-4f9e-8310-6672b38ea0ce.png",
+        "name": "MaticX",
+        "symbol": "MaticX",
+        "color": "#000000"
+      }
+    ],
+    "name": "WMATIC/MaticX",
+    "networkName": "polygon",
+    "symbol": "WMATIC/MaticX",
+    "linkedAssets": [
+      {
+        "assetId": "273e060f-889f-4ce1-bb66-a272d3a881e3",
+        "fraction": 1
+      }
+    ]
+  },
+  {
+    "_id": "aa1289c9-c882-4aa0-9e20-8f94d9c0a553",
+    "name": "WMATIC/stMATIC",
+    "symbol": "WMATIC/stMATIC",
+    "color": "#468af0",
+    "decimals": 18,
+    "address": "0xF79BF908d0e6d8E7054375CD80dD33424B1980bf",
+    "latestPrice": 1,
+    "active": true,
+    "visible": true,
+    "networkName": "polygon",
+    "type": "IBeefyDeposit",
+    "contractName": "BeefyDepositBridge",
+    "logos": [
+      {
+        "logoUri": "/asset-logos/d604439e-d464-4df5-bed1-66815b348cab.png",
+        "name": "Wrapped Matic",
+        "symbol": "WMATIC",
+        "color": "#468af0"
+      },
+      {
+        "logoUri": "/asset-logos/d21331f3-3db3-40e9-b972-ffddc5a6a795.png",
+        "name": "Staked MATIC (PoS)",
+        "symbol": "stMATIC",
+        "color": "#000000"
+      }
+    ],
+    "linkedAssets": [
+      {
+        "assetId": "67fdd203-c8f5-4ea9-a55c-a7439fb1c389",
+        "fraction": 1
+      }
+    ]
+  },
+  {
+    "_id": "da711af3-73c2-45b6-9d5c-aa6039ba4a7a",
+    "name": "WBTC/USDC/WETH",
+    "symbol": "WBTC/USDC/WETH",
+    "color": "#342743",
+    "decimals": 18,
+    "address": "0x866c72B76fca4785aEE3656C2064476f98Fe9Cc9",
+    "latestPrice": 1,
+    "active": true,
+    "visible": true,
+    "networkName": "polygon",
+    "type": "IBeefyDeposit",
+    "contractName": "BeefyDepositBridge",
+    "logos": [
+      {
+        "logoUri": "/asset-logos/7eecd38c-6ec4-4032-b1bd-bbd1bb82404f.png",
+        "name": "Wrapped Bitcoin",
+        "symbol": "WBTC",
+        "color": "#342743"
+      },
+      {
+        "logoUri": "/asset-logos/e251ecf6-48c2-4538-afcd-fbb92424054d.png",
+        "name": "USD Coin",
+        "symbol": "USDC",
+        "color": "#2775ca"
+      },
+      {
+        "logoUri": "/asset-logos/88f2647c-740e-4bbb-baed-c809302fea79.png",
+        "name": "Wrapped Ether",
+        "symbol": "WETH",
+        "color": "#737475"
+      }
+    ],
+    "linkedAssets": [
+      {
+        "assetId": "60842a7c-419d-4b6c-a2c2-77fb66e88aa3",
+        "fraction": 1
+      }
+    ]
+  },
+  {
+    "_id": "077d058d-4fc8-41f0-b0c2-d39ecebd5c42",
+    "active": true,
+    "address": "0x8c9d3Bc4425773BD2F00C4a2aC105c5Ad73c8141",
+    "color": "#342743",
+    "decimals": 18,
+    "linkedAssets": [
+      {
+        "assetId": "efb07755-a2d3-40f4-9b17-dd1db64b84c7",
+        "fraction": 1
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/7eecd38c-6ec4-4032-b1bd-bbd1bb82404f.png",
+        "name": "Wrapped Bitcoin",
+        "symbol": "WBTC",
+        "color": "#342743"
+      },
+      {
+        "logoUri": "/asset-logos/c42c2628-98c9-44e6-829b-5511036a1321.jpg",
+        "name": "renBTC",
+        "symbol": "renBTC",
+        "color": "#f29321"
+      }
+    ],
+    "name": "WBTC/renBTC",
+    "networkName": "polygon",
+    "symbol": "WBTC/renBTC",
+    "type": "IBeefyDeposit",
+    "contractName": "BeefyDepositBridge",
+    "visible": true
+  },
+  {
+    "_id": "ab5e09e4-e741-43c4-85c1-e0e0795f0c54",
+    "active": true,
+    "address": "0xb08b3603C5F2629eF83510E6049eDEeFdc3A2D91",
+    "color": "#f8f8f8",
+    "decimals": 18,
+    "logos": [
+      {
+        "logoUri": "/asset-logos/ab5e09e4-e741-43c4-85c1-e0e0795f0c54.png",
+        "name": "Clearpool",
+        "symbol": "CPOOL",
+        "color": "#f8f8f8"
+      }
+    ],
+    "name": "Clearpool",
+    "networkName": "polygon",
+    "rawLogoUri": "/asset-logos/ab5e09e4-e741-43c4-85c1-e0e0795f0c54.png",
+    "symbol": "CPOOL",
+    "type": "token",
+    "visible": true
+  },
+  {
+    "_id": "4feb46ac-0c75-403f-b039-72f9bb618a22",
+    "active": true,
+    "address": "0x3f6e10B1ee2882C8278B3e471230e143414cCaa9",
+    "callParams": {
+      "poolAddress": "0x3f6e10B1ee2882C8278B3e471230e143414cCaa9",
+      "factoryAddress": "0x215CCa938dF02c9814BE2D39A285B941FbdA79bA"
+    },
+    "color": "#f8f8f8",
+    "contractName": "ClearpoolDepositBridge",
+    "decimals": 6,
+    "linkedAssets": [
+      {
+        "assetId": "e251ecf6-48c2-4538-afcd-fbb92424054d",
+        "fraction": 1.0
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/ab5e09e4-e741-43c4-85c1-e0e0795f0c54.png",
+        "name": "Parallel Capital (Clearpool)",
+        "symbol": "cpPAR-USDC",
+        "color": "#f8f8f8"
+      }
+    ],
+    "name": "Parallel Capital (Clearpool)",
+    "networkName": "polygon",
+    "symbol": "cpPAR-USDC",
+    "type": "IClearpoolDeposit",
+    "visible": true,
+    "category": ["Yield", "Stablecoin"]
+  },
+  {
+    "_id": "bc8c13fa-278d-424e-a686-17481459119a",
+    "active": true,
+    "address": "0x24B2d3746E39626D4352891FF909D4F3176BE245",
+    "callParams": {
+      "poolAddress": "0x24B2d3746E39626D4352891FF909D4F3176BE245",
+      "factoryAddress": "0x215CCa938dF02c9814BE2D39A285B941FbdA79bA"
+    },
+    "color": "#f8f8f8",
+    "contractName": "ClearpoolDepositBridge",
+    "decimals": 6,
+    "linkedAssets": [
+      {
+        "assetId": "e251ecf6-48c2-4538-afcd-fbb92424054d",
+        "fraction": 1.0
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/ab5e09e4-e741-43c4-85c1-e0e0795f0c54.png",
+        "name": "Amber Group (Clearpool)",
+        "symbol": "cpAMB-USDC",
+        "color": "#f8f8f8"
+      }
+    ],
+    "name": "Amber Group (Clearpool)",
+    "networkName": "polygon",
+    "symbol": "cpAMB-USDC",
+    "type": "IClearpoolDeposit",
+    "visible": true,
+    "category": ["Yield", "Stablecoin"]
+  },
+  {
+    "_id": "86733cfa-5a93-424c-a875-4715949d847a",
+    "active": true,
+    "address": "0xB254554636a3ff52e8B2d0f06203921c137E10d5",
+    "callParams": {
+      "poolAddress": "0xB254554636a3ff52e8B2d0f06203921c137E10d5",
+      "factoryAddress": "0x215CCa938dF02c9814BE2D39A285B941FbdA79bA"
+    },
+    "color": "#f8f8f8",
+    "contractName": "ClearpoolDepositBridge",
+    "decimals": 6,
+    "linkedAssets": [
+      {
+        "assetId": "e251ecf6-48c2-4538-afcd-fbb92424054d",
+        "fraction": 1.0
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/ab5e09e4-e741-43c4-85c1-e0e0795f0c54.png",
+        "name": "Auros (Clearpool)",
+        "symbol": "cpAUR-USDC",
+        "color": "#f8f8f8"
+      }
+    ],
+    "name": "Auros (Clearpool)",
+    "networkName": "polygon",
+    "symbol": "cpAUR-USDC",
+    "type": "IClearpoolDeposit",
+    "visible": true,
+    "category": ["Yield", "Stablecoin"]
+  },
+  {
+    "_id": "8a028553-0e93-4ceb-be2a-ef84d102fd29",
+    "active": true,
+    "address": "0x54b1bE659aF221BAd672efa37B92829Ec173E21C",
+    "callParams": {
+      "poolAddress": "0x54b1bE659aF221BAd672efa37B92829Ec173E21C",
+      "factoryAddress": "0x215CCa938dF02c9814BE2D39A285B941FbdA79bA"
+    },
+    "color": "#f8f8f8",
+    "contractName": "ClearpoolDepositBridge",
+    "decimals": 6,
+    "linkedAssets": [
+      {
+        "assetId": "e251ecf6-48c2-4538-afcd-fbb92424054d",
+        "fraction": 1.0
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/ab5e09e4-e741-43c4-85c1-e0e0795f0c54.png",
+        "name": "Bastion Trading (Clearpool)",
+        "symbol": "cpBAS-USDC",
+        "color": "#f8f8f8"
+      }
+    ],
+    "name": "Bastion Trading (Clearpool)",
+    "networkName": "polygon",
+    "symbol": "cpBAS-USDC",
+    "type": "IClearpoolDeposit",
+    "visible": true,
+    "category": ["Yield", "Stablecoin"]
+  },
+  {
+    "_id": "b2eb65f6-d6ce-45e3-82ff-5b29bb04d278",
+    "active": true,
+    "address": "0x876057aFb6F125d89f0B716AC815d79686b4F2Fd",
+    "callParams": {
+      "poolAddress": "0x876057aFb6F125d89f0B716AC815d79686b4F2Fd",
+      "factoryAddress": "0x215CCa938dF02c9814BE2D39A285B941FbdA79bA"
+    },
+    "color": "#f8f8f8",
+    "contractName": "ClearpoolDepositBridge",
+    "decimals": 6,
+    "linkedAssets": [
+      {
+        "assetId": "e251ecf6-48c2-4538-afcd-fbb92424054d",
+        "fraction": 1.0
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/ab5e09e4-e741-43c4-85c1-e0e0795f0c54.png",
+        "name": "Folkvang (Clearpool)",
+        "symbol": "cpFOL-USDC",
+        "color": "#f8f8f8"
+      }
+    ],
+    "name": "Folkvang (Clearpool)",
+    "networkName": "polygon",
+    "symbol": "cpFOL-USDC",
+    "type": "IClearpoolDeposit",
+    "visible": true,
+    "category": ["Yield", "Stablecoin"]
+  },
+  {
+    "_id": "7e8b94ca-76b9-4673-a84d-ae744a4853b0",
+    "active": true,
+    "address": "0x9F8e69786dE448e6805c0f75eadbC9323502b194",
+    "callParams": {
+      "poolAddress": "0x9F8e69786dE448e6805c0f75eadbC9323502b194",
+      "factoryAddress": "0x215CCa938dF02c9814BE2D39A285B941FbdA79bA"
+    },
+    "color": "#f8f8f8",
+    "contractName": "ClearpoolDepositBridge",
+    "decimals": 6,
+    "linkedAssets": [
+      {
+        "assetId": "e251ecf6-48c2-4538-afcd-fbb92424054d",
+        "fraction": 1.0
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/ab5e09e4-e741-43c4-85c1-e0e0795f0c54.png",
+        "name": "Wintermute (Clearpool)",
+        "symbol": "cpWIN-USDC",
+        "color": "#f8f8f8"
+      }
+    ],
+    "name": "Wintermute (Clearpool)",
+    "networkName": "polygon",
+    "symbol": "cpWIN-USDC",
+    "type": "IClearpoolDeposit",
+    "visible": true,
+    "category": ["Yield", "Stablecoin"]
+  },
+  {
+    "_id": "21191cdf-3d45-4a7e-861f-96b125b93a88",
+    "active": true,
+    "address": "0xE48882A661B3A7d109c70Bad8Eb26f806008bE79",
+    "callParams": {
+      "poolAddress": "0xE48882A661B3A7d109c70Bad8Eb26f806008bE79",
+      "factoryAddress": "0x215CCa938dF02c9814BE2D39A285B941FbdA79bA"
+    },
+    "color": "#f8f8f8",
+    "contractName": "ClearpoolDepositBridge",
+    "decimals": 6,
+    "linkedAssets": [
+      {
+        "assetId": "e251ecf6-48c2-4538-afcd-fbb92424054d",
+        "fraction": 1.0
+      }
+    ],
+    "logos": [
+      {
+        "logoUri": "/asset-logos/ab5e09e4-e741-43c4-85c1-e0e0795f0c54.png",
+        "name": "LedgerPrime (Clearpool)",
+        "symbol": "cpLED-USDC",
+        "color": "#f8f8f8"
+      }
+    ],
+    "name": "LedgerPrime (Clearpool)",
+    "networkName": "polygon",
+    "symbol": "cpLED-USDC",
+    "type": "IClearpoolDeposit",
+    "visible": true,
+    "category": ["Yield", "Stablecoin"]
   }
 ]
