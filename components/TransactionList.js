@@ -82,9 +82,9 @@ export default function TransactionList ({ data }) {
                       <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm font-medium text-gray-200 sm:pl-6 md:pl-0">
                         <Tooltip title="Click to PolygonScan" placement="top" arrow>
                           <a href={"https://polygonscan.com/tx/" + transaction.transactionHash} target="_blank" rel="noreferrer">
-                            <span className={"inline-flex items-center px-2 py-0.5 rounded text-xs font-medium "}>
-                              {/* // typeOfEvent[transaction.functionName] !== undefined ? typeOfEvent[transaction.functionName].color : transaction.functionName}> */}
-                                {transaction.functionName ? transaction.functionName : "Unknown"}
+                            <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${typeOfEvent[transaction.functionName] !== undefined ? typeOfEvent[transaction.functionName].color : transaction.functionName}`}>
+                            
+                                {transaction.functionName ? typeOfEvent[transaction.functionName].event : "Unknown"}
                             </span>
                           </a>
                         </Tooltip>

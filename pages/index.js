@@ -10,7 +10,8 @@ import OneByOne from "/components/OneByOne";
 import TotalTVL from "/components/TotalTVL";
 import WeeklyFees from "/components/WeeklyFees";
 import TransactionList from "/components/TransactionList";
-import TwobyTwoChart from "/components/TwobyTwoChart";
+// import TwobyTwoChart from "/components/TwobyTwoChart";
+import DailyActiveUsers from "/components/DAU";
 import { getTxs } from "../framework/get-transactions";
 
 /////////
@@ -239,7 +240,8 @@ export default function App() {
           <TotalTVL data={data.portfolios} />
           <TvlByAssetComponent data={tvlByAssets} />
           <WeeklyFees data={weeklyFees} />
-          {transactionsData && <TransactionList data={transactionsData}/>}
+          <TransactionList data={transactionsData}/>
+          <DailyActiveUsers transactions={transactionsData} />
         </div>
         :
         <div className="mx-auto grid grid-cols-2 lg:grid-cols-6">
