@@ -4,7 +4,7 @@ import useSWR from "swr";
 // const txUrl = "https://dev.defibasket.org/api/get-transactions";
 
 async function fetchData(perPage=-1, pageIndex=0) {
-  const queryFunction = `get-transactions&perPage=${perPage}&pageIndex=${pageIndex}`;
+  const queryFunction = `get-transactions&perPage=${perPage}&pageIndex=${pageIndex}&networkName=polygon`;
   const data = await fetch("/api/get-data" + "?queryFunction=" + queryFunction)
     .then((res) => res.json()).catch((err) => console.error(err))
   

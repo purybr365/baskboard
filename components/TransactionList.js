@@ -42,7 +42,7 @@ export default function TransactionList ({ data }) {
     "withdrawPortfolio": {event: "withdraw", color: "bg-red-100 text-red-800"},
     "depositPortfolio": {event: "deposit", color: "bg-blue-100 text-blue-800"},
     // "Transfer": {event: "transfer", color: "bg-blue-100 text-blue-800"},
-    // undefined: {event: "UNKNOWN", color: "bg-blue-100 text-blue-800"},
+    undefined: {event: "UNKNOWN", color: "bg-blue-100 text-blue-800"},
   };
   
   // console.log("TL", data);
@@ -50,6 +50,8 @@ export default function TransactionList ({ data }) {
 
   // TODO -> include helper fields in the transactions list: 
   // status (IN/OUT), type (create, edit, withdraw)
+
+  console.log("sortedTx", sortedTransactions);
 
   return (
     <div className="col-span-2 p-5 m-2 rounded-lg bg-sky-800 text-center">
@@ -82,7 +84,7 @@ export default function TransactionList ({ data }) {
                           <a href={"https://polygonscan.com/tx/" + transaction.transactionHash} target="_blank" rel="noreferrer">
                             <span className={"inline-flex items-center px-2 py-0.5 rounded text-xs font-medium "}>
                               {/* // typeOfEvent[transaction.functionName] !== undefined ? typeOfEvent[transaction.functionName].color : transaction.functionName}> */}
-                                {transaction.functionName}
+                                {transaction.functionName ? transaction.functionName : "Unknown"}
                             </span>
                           </a>
                         </Tooltip>

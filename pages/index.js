@@ -20,7 +20,7 @@ import { getTxs } from "../framework/get-transactions";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function GetPortfolios () {
-  const queryFunction = "get-portfolios&perPage=-1";
+  const queryFunction = "get-portfolios&perPage=999";
   const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
   
   return {
@@ -74,7 +74,7 @@ function calculateMetricsFromPortfolios (portfolios, tvl) {
   
   let counts = {};
   let counts_10 = {};
-  //console.log("portfoio", portfolios);
+  console.log("portfoio", portfolios);
   for (const port of portfolios) {
     
     // Counting Unique Deposit Addresses (UDAs)
@@ -144,7 +144,7 @@ function calculateMetricsFromTransactions(transactions, assets) {
   
   const sumWeeklyFees = [];
   // console.log("transac", transactions);
-  if (transactions) {
+  if (transactions.length >0) {
     for (const transac of transactions) {
       //console.log("intrans", transac);
       // Determining fees by date
@@ -208,11 +208,12 @@ export default function App() {
   if (isLoadingTxs) return loading
   if (isLoadingAssets) return loading
 
-  const { data } = calculateMetricsFromPortfolios(rawPortfoliosData.portfolios, rawTvlData.tvl);
+  const { data } = calculateMetricsFromPortfolios(rawPortfoliosData.portfolios, rawTvlData?.tvl);
   const tvlByAssets = calculateTvlByAssets(rawPortfoliosData.portfolios, rawAssets);
 
   // console.log("tvlByAssets", tvlByAssets);
   // console.log("fee", weeklyFees);
+  // console.log("txtx", transactionsData);
   
   return (
     <div className="relative w-full h-full font-mono bg-sky-900">
@@ -238,7 +239,7 @@ export default function App() {
           <TotalTVL data={data.portfolios} />
           <TvlByAssetComponent data={tvlByAssets} />
           <WeeklyFees data={weeklyFees} />
-          <TransactionList data={transactionsData}/>
+          {transactionsData && <TransactionList data={transactionsData}/>}
         </div>
         :
         <div className="mx-auto grid grid-cols-2 lg:grid-cols-6">
