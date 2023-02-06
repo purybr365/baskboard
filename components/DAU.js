@@ -18,7 +18,7 @@ function formatData(data, users = false) {
 }
 
 export default function DailyActiveUsers(transactions) {
-  console.log("tx2",transactions.transactions);
+  // console.log("tx2",transactions.transactions);
   
   let dailyTxs = {};
   transactions?.transactions.forEach((tx) => {

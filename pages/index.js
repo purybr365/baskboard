@@ -1,18 +1,18 @@
-import useSWR from "swr";
-import React, { useEffect, useState } from "react";
-import Head from "next/head";
-import Link from "next/link";
-import { calculateTvlByAssets, TvlByAssetComponent } from "/components/tvlByAsset";
-// import rawAssets from "/common/assets.json";
+import useSWR from 'swr';
+import React, { useEffect, useState } from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+import { calculateTvlByAssets, TvlByAssetComponent } from '/components/tvlByAsset';
+// import rawAssets from '/common/assets.json';
 
 // Importing dashboard components
-import OneByOne from "/components/OneByOne";
-import TotalTVL from "/components/TotalTVL";
-import WeeklyFees from "/components/WeeklyFees";
-import TransactionList from "/components/TransactionList";
-// import TwobyTwoChart from "/components/TwobyTwoChart";
-import DailyActiveUsers from "/components/DAU";
-import { getTxs } from "../framework/get-transactions";
+import OneByOne from '/components/OneByOne';
+import TotalTVL from '/components/TotalTVL';
+import WeeklyFees from '/components/WeeklyFees';
+import TransactionList from '/components/TransactionList';
+// import TwobyTwoChart from '/components/TwobyTwoChart';
+import DailyActiveUsers from '/components/DAU';
+import { getTxs } from '../framework/get-transactions';
 
 /////////
 // Fetch all portfolios to be shared among components
@@ -21,8 +21,8 @@ import { getTxs } from "../framework/get-transactions";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function GetPortfolios () {
-  const queryFunction = "get-portfolios&perPage=999";
-  const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
+  const queryFunction = 'get-portfolios&perPage=999';
+  const { data, error } = useSWR('/api/get-data' + '?queryFunction=' + queryFunction, fetcher);
   
   return {
     rawPortfoliosData: data,
@@ -32,8 +32,8 @@ function GetPortfolios () {
 }
 
 function GetTVL () {
-  const queryFunction = "get-tvl";
-  const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
+  const queryFunction = 'get-tvl';
+  const { data, error } = useSWR('/api/get-data' + '?queryFunction=' + queryFunction, fetcher);
 
   return {
     rawTvlData: data,
@@ -43,11 +43,22 @@ function GetTVL () {
 }
 
 function GetAssets () {
-  const queryFunction = "get-assets&networkName=polygon&perPage=-1";
-  const { data, error } = useSWR("/api/get-data" + "?queryFunction=" + queryFunction, fetcher);
+  const queryFunction = 'get-assets&networkName=polygon&perPage=-1';
+  const { data, error } = useSWR('/api/get-data' + '?queryFunction=' + queryFunction, fetcher);
 
   return {
     rawAssets: data,
+    isLoading: !error && !data,
+    isError: error,
+  }
+}
+
+function GetEasyMetrics () {
+  const queryFunction = 'get-easy-metrics';
+  const { data, error } = useSWR(`/api/get-data?queryFunction=${queryFunction}`, fetcher);
+
+  return {
+    metrics: data?.metrics,
     isLoading: !error && !data,
     isError: error,
   }
@@ -65,9 +76,9 @@ async function GetTransactions (tempTxsData, setTempTxsData, setTransactionsData
 
 function calculateMetricsFromPortfolios (portfolios, tvl) {
 
-  let d = new Date();
-  let curr_date = d.getDate();
-  let last_wk = curr_date - 7;
+  // let d = new Date();
+  // let curr_date = d.getDate();
+  // let last_wk = curr_date - 7;
 
   let port_above_0 = 0;
   let port_above_50 = 0;
@@ -75,7 +86,7 @@ function calculateMetricsFromPortfolios (portfolios, tvl) {
   
   let counts = {};
   let counts_10 = {};
-  console.log("portfoio", portfolios);
+  // console.log('portfoio', portfolios);
   for (const port of portfolios) {
     
     // Counting Unique Deposit Addresses (UDAs)
@@ -100,22 +111,22 @@ function calculateMetricsFromPortfolios (portfolios, tvl) {
 
   let latestPortfolios = portfolios.slice(portfolios.length-10,portfolios.length);
   const latestPortfoliosHeader = {
-    header1: "nftId", 
-    header2: "Date", 
-    header3: "TVL"
+    header1: 'nftId', 
+    header2: 'Date', 
+    header3: 'TVL'
   };
 
   return {
-    "data": {
-      "tvl": ["TVL", tvl, "$_thousands", "Total Value Locked"],
-      "port_0": ["Baskets > $0", port_above_0, "int", ""],
-      "port_50": ["Baskets > $50", port_above_50, "int", ""],
-      "port_1000": ["Baskets > $1k", port_above_1000, "int", ""],
-      "uda": ["UDA", Object.keys(counts).length, "int", "Unique Deposit Address"],
-      "active_users": ["Active users", Object.keys(counts_10).length, "int", "UDA with value > $10"],
-      "latestPorts": ["Latest baskets", latestPortfolios, "table", latestPortfoliosHeader, ""],
-      "latestTransacs": ["Latest transactions", "", "table", ""],
-      "portfolios": ["Raw portfolios", portfolios, "", ""]
+    'data': {
+      'tvl': ['TVL', tvl, '$_thousands', 'Total Value Locked'],
+      'port_0': ['Baskets > $0', port_above_0, 'int', ''],
+      'port_50': ['Baskets > $50', port_above_50, 'int', ''],
+      'port_1000': ['Baskets > $1k', port_above_1000, 'int', ''],
+      'uda': ['UDA', Object.keys(counts).length, 'int', 'Unique Deposit Address'],
+      'active_users': ['Active users', Object.keys(counts_10).length, 'int', 'UDA with value > $10'],
+      'latestPorts': ['Latest baskets', latestPortfolios, 'table', latestPortfoliosHeader, ''],
+      'latestTransacs': ['Latest transactions', '', 'table', ''],
+      'portfolios': ['Raw portfolios', portfolios, '', '']
     }
   }
 
@@ -131,23 +142,21 @@ function setToMonday( date ) {
 
 // Helper function to find fee in USD based on latestPrice
 // from assets db list
-function findFeeInUsd (fee, assets) {
-  //const asset = assets.find(item => item._id === fee._id);
-  //const feeAmount = fee.amount ;
-  
-  // TODO: Replace latestPrice for historical price at fee acrrual time
-  const feeInUsd = fee.currentPriceUsd * fee.amount;
+// function findFeeInUsd (fee, assets) {
+//   // const asset = assets.find(item => item._id === fee._id);
+//   // const feeAmount = fee.amount ;
+//   // TODO: Replace latestPrice for historical price at fee acrrual time
+//   const feeInUsd = fee.currentPriceUsd * fee.amount;
 
-  return feeInUsd;
-}
+//   return feeInUsd;
+// }
 
-function calculateMetricsFromTransactions(transactions, assets) {
-  
+function calculateMetricsFromTransactions (transactions) {
   const sumWeeklyFees = [];
-  // console.log("transac", transactions);
+  // console.log('transac', transactions);
   if (transactions.length >0) {
     for (const transac of transactions) {
-      //console.log("intrans", transac);
+      // console.log('intrans', transac);
       // Determining fees by date
       if (transac.fees.length > 0) {
         for (const fee of transac.fees) {
@@ -158,9 +167,9 @@ function calculateMetricsFromTransactions(transactions, assets) {
         }
       }
     }
-  };
+  }
 
-  // console.log("fees", sumFees);
+  // console.log('fees', sumFees);
 
   const weeklyFees = sumWeeklyFees.reduce((acc, obj) => {
     var existObj = acc.find(item => new Date(item.date).toDateString() === new Date(obj.date).toDateString());
@@ -172,7 +181,7 @@ function calculateMetricsFromTransactions(transactions, assets) {
     return acc;
   },[]);
   
-  // console.log("weeklyFee", weeklyFees);
+  // console.log('weeklyFee', weeklyFees);
   return weeklyFees;
 
   // Grouping fees by week
@@ -186,12 +195,13 @@ export default function App() {
   const [weeklyFees, setWeeklyFees] = useState([])
 
   const { rawPortfoliosData, isLoading, error } = GetPortfolios();
-  const { rawTvlData, isLoadingTVL, errorTVL } = GetTVL();
-  const { rawAssets,  isLoadingAssets, errorAssets } = GetAssets();
+  const { rawTvlData } = GetTVL();
+  const { rawAssets,isLoadingAssets } = GetAssets();
+  const { metrics, isLoadingMetrics, errorMetrics } = GetEasyMetrics();
 
   const loading =
-    <div className="relative w-screen h-screen font-mono bg-sky-900 p-10">
-      <div className="content-center"><h1 className="animate-pulse text-center text-4xl text-white font-mono mb-10">Loading</h1></div>
+    <div className='relative w-screen h-screen font-mono bg-sky-900 p-10'>
+      <div className='content-center'><h1 className='animate-pulse text-center text-4xl text-white font-mono mb-10'>Loading</h1></div>
     </div>
 
   useEffect(() => {
@@ -199,9 +209,9 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    // console.log("data", transactionsData);
+    // console.log('data', transactionsData);
     setWeeklyFees(calculateMetricsFromTransactions(transactionsData, rawAssets));
-    console.log("fess", weeklyFees);
+    // console.log('fess', weeklyFees);
   }, [transactionsData, rawAssets, isLoadingTxs]);
 
   if (error) return <div>failed to load</div>
@@ -212,24 +222,26 @@ export default function App() {
   const { data } = calculateMetricsFromPortfolios(rawPortfoliosData.portfolios, rawTvlData?.tvl);
   const tvlByAssets = calculateTvlByAssets(rawPortfoliosData.portfolios, rawAssets);
 
-  // console.log("tvlByAssets", tvlByAssets);
-  // console.log("fee", weeklyFees);
-  // console.log("txtx", transactionsData);
+  // console.log('tvlByAssets', tvlByAssets);
+  // console.log('fee', weeklyFees);
+  // console.log('txtx', transactionsData);
+  console.log('metrics', metrics, isLoadingMetrics, errorMetrics);
   
   return (
-    <div className="relative w-full h-full font-mono bg-sky-900">
+    <div className='relative w-full h-full font-mono bg-sky-900'>
       <Head>
         <title>Baskboard</title>
-        <meta name="description" content="The ultimate Picnic dashboard" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name='description' content='The ultimate Picnic dashboard' />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
       
-      <main className="p-5 pt-10 mx-auto">
-        <h1 className="text-center text-4xl text-white font-mono mb-10">
+      <main className='p-5 pt-10 mx-auto'>
+        <h1 className='text-center text-4xl text-white font-mono mb-10'>
           Picnic Dashboard
         </h1>
         {!data.error ? 
-        <div className="mx-auto grid grid-cols-2 lg:grid-cols-6">
+        <>
+        <div className='mx-auto grid grid-cols-2 lg:grid-cols-6'>
 
           <OneByOne data={data.uda} />
           <OneByOne data={data.active_users} />
@@ -237,28 +249,43 @@ export default function App() {
           <OneByOne data={data.port_0} />
           <OneByOne data={data.port_50} />
           <OneByOne data={data.port_1000} />
-          <TotalTVL data={data.portfolios} />
+          <TotalTVL data={data.portfolios} transactionsData={transactionsData} />
           <TvlByAssetComponent data={tvlByAssets} />
           <WeeklyFees data={weeklyFees} />
           <TransactionList data={transactionsData}/>
           <DailyActiveUsers transactions={transactionsData} />
         </div>
+        <h1 className='text-center text-4xl text-white font-mono my-10'>
+          Easy Dashboard
+        </h1>
+        <div className='mx-auto grid grid-cols-2 lg:grid-cols-6'>
+
+          <OneByOne data={["Unique Users", metrics?.easyUsers]} />
+          <OneByOne data={["Acct TVL", metrics?.easyAccountTvl, "$_thousands"]} />
+          <OneByOne data={["Invest TVL", metrics?.easyInvestmentsTvl, "$_thousands"]} />
+          <OneByOne data={["Total TVL", metrics?.easyInvestmentsTvl + metrics?.easyAccountTvl, "$_thousands"]} />
+          <OneByOne data={["Basket Num", metrics?.easyInvestmentsNumber]} />
+          <OneByOne data={["Retention 1D", metrics?.easyRetention1Day, "percentage"]} />
+          <OneByOne data={["Retention 7D", metrics?.easyRetention7Days, "percentage"]} />
+          <OneByOne data={["Retention 30D", metrics?.easyRetention30Days, "percentage"]} />
+        </div>
+        </>
         :
-        <div className="mx-auto grid grid-cols-2 lg:grid-cols-6">
-          <div className="col-span-2 p-5 m-2 rounded-lg bg-sky-800 text-center">
-            <span className="bg-red-500 bg-opacity-50 rounded-md text-center text-xl text-white font-mono mb-10">Error - Couldn&apos;t update data <br />
+        <div className='mx-auto grid grid-cols-2 lg:grid-cols-6'>
+          <div className='col-span-2 p-5 m-2 rounded-lg bg-sky-800 text-center'>
+            <span className='bg-red-500 bg-opacity-50 rounded-md text-center text-xl text-white font-mono mb-10'>Error - Couldn&apos;t update data <br />
             Message: {data.error_msg}</span>
           </div>
         </div>
         }
       </main>
 
-      <footer className="relative w-full text-center border-sky-800 p-3">
-        <span className="text-sky-400 font-mono text-sm font-light">
+      <footer className='relative w-full text-center border-sky-800 p-3'>
+        <span className='text-sky-400 font-mono text-sm font-light'>
           Made with &hearts;<br /> 
-          <Link href="https://github.com/purybr365/baskboard" className="hover:underline underline-offset-2">GitHub</Link>
-          {" "}|{" "}
-          <Link href="https://discord.gg/5AVTGwkCEs" className="hover:underline underline-offset-2">Discord</Link>
+          <Link href='https://github.com/purybr365/baskboard' className='hover:underline underline-offset-2'>GitHub</Link>
+          {' '}|{' '}
+          <Link href='https://discord.gg/5AVTGwkCEs' className='hover:underline underline-offset-2'>Discord</Link>
 
         </span>
         

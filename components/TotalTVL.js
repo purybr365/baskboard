@@ -3,7 +3,36 @@ import dynamic from "next/dynamic";
 
 const TVLChart = dynamic(() => import("/components/charts/TVLChart"), {ssr: false});
 
-function TotalTVL( { data } ) {
+function calculateHistoricalTvl(transactions) {
+  const orderedTxs = transactions?.sort(function(a,b){
+    // Turn your strings into dates, and then subtract them
+    // to get a value that is either negative, positive, or zero.
+    return new Date(a.executedOn) - new Date(b.executedOn);
+  });
+
+  let historicalTvl = 0;
+  let time = 0;
+  const chartData = orderedTxs?.map((tx) => {
+    time++;
+    if (["createPortfolio", "depositPortfolio"].includes(tx.functionName)) {
+      historicalTvl += !isNaN(tx.inputs[0]?.value) ? tx.inputs[0]?.value : 0;
+      return {time: time, value: historicalTvl};
+    } else if (["withdrawPortfolio"].includes(tx.functionName)) {
+      // console.log("withdraw", tx);
+      historicalTvl -= !isNaN(tx.outputs[0]?.value) ? tx.outputs[0]?.value : 0;
+      return {time: time, value: historicalTvl};
+    } else {
+      return {time: time, value: historicalTvl};
+    }
+  });
+
+  console.log("datadata",transactions, orderedTxs, chartData);
+
+  return chartData.sort((a,b) => new Date(a.time) - new Date(b.time));
+  
+}
+
+function TotalTVL( { data, transactionsData } ) {
 
   // Build the rawTVL array
   let rawTVL = [];
@@ -53,6 +82,10 @@ function TotalTVL( { data } ) {
 
   const dataGraph = creds.res;
 
+  console.log("datadataXXX", dataGraph, transactionsData);
+
+  const historicalTvlChartData = calculateHistoricalTvl(transactionsData);
+
   //console.log(dataGraph);
 
   ///////////
@@ -60,10 +93,17 @@ function TotalTVL( { data } ) {
   ///////////
   
   return(
-    <div className="p-5 m-2 rounded-lg bg-sky-800 text-center col-span-2">
-      <span className="text-sky-400">TVL</span><br /><br />
-      <TVLChart data={dataGraph} className="bg-gray-500" />    
-    </div>
+    <>
+      <div className="p-5 m-2 rounded-lg bg-sky-800 text-center col-span-2">
+        <span className="text-sky-400">TVL</span><br /><br />
+        <TVLChart data={dataGraph} className="bg-gray-500" />    
+      </div>
+
+      <div className="p-5 m-2 rounded-lg bg-sky-800 text-center col-span-2">
+        <span className="text-sky-400">Reconstructed TVL</span><br /><br />
+        <TVLChart data={historicalTvlChartData} className="bg-gray-500" />    
+      </div>
+    </>
   )
 }
 

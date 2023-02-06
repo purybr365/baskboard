@@ -20,7 +20,7 @@ function NumTransac( { data } ) {
     // to get a value that is either negative, positive, or zero.
     return new Date(a.time) - new Date(b.time);
   });
-  console.log("ordered", orderedWeeklyFees);
+  // console.log("ordered", orderedWeeklyFees);
   // TODO: Create a second series for accumulated fees
 
   // const creds = dataTVLOrdered.reduce((iterVals, val, curIndex, arr) => {

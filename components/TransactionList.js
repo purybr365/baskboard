@@ -51,7 +51,7 @@ export default function TransactionList ({ data }) {
   // TODO -> include helper fields in the transactions list: 
   // status (IN/OUT), type (create, edit, withdraw)
 
-  console.log("sortedTx", sortedTransactions);
+  // console.log("sortedTx", sortedTransactions);
 
   return (
     <div className="col-span-2 p-5 m-2 rounded-lg bg-sky-800 text-center">

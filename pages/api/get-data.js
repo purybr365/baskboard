@@ -4,11 +4,12 @@
 //const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const baseUrls = {
-  "root": "https://usepicnic.com",
+  "root": "https://dev.usepicnic.com",
   "get-portfolios": "/api/get-portfolios/",
   "get-tvl": "/api/v1/get-tvl/",
   "get-assets": "/api/get-assets/",
   "get-transactions": "/api/get-transactions/",
+  "get-easy-metrics": "/api/get-easy-metrics/",
 };
 
 export default async function handler(request, response) {
