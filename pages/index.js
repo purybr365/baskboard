@@ -241,34 +241,34 @@ export default function App() {
         </h1>
         {!data.error ? 
         <>
-        <div className='mx-auto grid grid-cols-2 lg:grid-cols-6'>
+          <div className='mx-auto grid grid-cols-2 lg:grid-cols-6'>
+            <OneByOne data={data.uda} />
+            <OneByOne data={data.active_users} />
+            <OneByOne data={data.tvl} />
+            <OneByOne data={data.port_0} />
+            <OneByOne data={data.port_50} />
+            <OneByOne data={data.port_1000} />
+            <TotalTVL data={data.portfolios} transactionsData={transactionsData} />
+            <TvlByAssetComponent data={tvlByAssets} />
+            <WeeklyFees data={weeklyFees} />
+            <TransactionList data={transactionsData}/>
+            <DailyActiveUsers transactions={transactionsData} />
+          </div>
 
-          <OneByOne data={data.uda} />
-          <OneByOne data={data.active_users} />
-          <OneByOne data={data.tvl} />
-          <OneByOne data={data.port_0} />
-          <OneByOne data={data.port_50} />
-          <OneByOne data={data.port_1000} />
-          <TotalTVL data={data.portfolios} transactionsData={transactionsData} />
-          <TvlByAssetComponent data={tvlByAssets} />
-          <WeeklyFees data={weeklyFees} />
-          <TransactionList data={transactionsData}/>
-          <DailyActiveUsers transactions={transactionsData} />
-        </div>
-        <h1 className='text-center text-4xl text-white font-mono my-10'>
-          Easy Dashboard
-        </h1>
-        <div className='mx-auto grid grid-cols-2 lg:grid-cols-6'>
-
-          <OneByOne data={["Unique Users", metrics?.easyUsers]} />
-          <OneByOne data={["Acct TVL", metrics?.easyAccountTvl, "$_thousands"]} />
-          <OneByOne data={["Invest TVL", metrics?.easyInvestmentsTvl, "$_thousands"]} />
-          <OneByOne data={["Total TVL", metrics?.easyInvestmentsTvl + metrics?.easyAccountTvl, "$_thousands"]} />
-          <OneByOne data={["Basket Num", metrics?.easyInvestmentsNumber]} />
-          <OneByOne data={["Retention 1D", metrics?.easyRetention1Day, "percentage"]} />
-          <OneByOne data={["Retention 7D", metrics?.easyRetention7Days, "percentage"]} />
-          <OneByOne data={["Retention 30D", metrics?.easyRetention30Days, "percentage"]} />
-        </div>
+          <h1 className='text-center text-4xl text-white font-mono my-10'>
+            Easy Dashboard
+          </h1>
+          
+          <div className='mx-auto grid grid-cols-2 lg:grid-cols-6'>
+            <OneByOne data={["Unique Users", metrics?.easyUsers]} />
+            <OneByOne data={["Acct TVL", metrics?.easyAccountTvl, "$_thousands"]} />
+            <OneByOne data={["Invest TVL", metrics?.easyInvestmentsTvl, "$_thousands"]} />
+            <OneByOne data={["Total TVL", metrics?.easyInvestmentsTvl + metrics?.easyAccountTvl, "$_thousands"]} />
+            <OneByOne data={["Baskets > 0", metrics?.easyInvestmentsNumber]} />
+            <OneByOne data={["Retention 1D", metrics?.easyRetention1Day, "percentage"]} />
+            <OneByOne data={["Retention 7D", metrics?.easyRetention7Days, "percentage"]} />
+            <OneByOne data={["Retention 30D", metrics?.easyRetention30Days, "percentage"]} />
+          </div>
         </>
         :
         <div className='mx-auto grid grid-cols-2 lg:grid-cols-6'>
