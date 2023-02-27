@@ -6,7 +6,7 @@ async function fetchData(url, perPage=-1, pageIndex=0) {
       "accept": "application/json",
       "content-type": "application/json",
     },
-    "body": JSON.stringify({perPage: perPage, pageIndex: pageIndex}),
+    "body": JSON.stringify({perPage: perPage, pageIndex: pageIndex, networkName: "polygon"}),
     "method": "POST"
   }).then((res) => res.json()).catch((err) => console.error(err))
 };
@@ -17,21 +17,22 @@ API CALLS TESTS
 ===============`);
 
 // Portfolios
-const portfoliosUrl = "https://dev.defibasket.org/api/get-portfolios";
-const res = await fetchData(portfoliosUrl);
+const portfoliosUrl = "https://easy.usepicnic.com/api/get-portfolios";
+const res = await fetchData(portfoliosUrl, 9999);
 
 console.log("");
 console.log("Testing `get-portfolios` API call...");
 console.log("Number of portfolios retrieved: ", res.error ? res : res.portfolios.length);
 
 // Transactions
-const txUrl = "https://dev.defibasket.org/api/get-transactions";
+const txUrl = "https://easy.usepicnic.com/api/get-transactions";
 let txs = [];
 let pageIndex = 0;
 async function getTxs() {
   await fetchData(txUrl, 300, pageIndex).then(async (res) => {
+    // const txsResponse = await res;
     txs = txs.concat(res.transactions);
-    console.log(txs.length);
+    console.log("txs", txs.length);
     if (res.pagination.hasNext) {
       pageIndex++;
       await getTxs();

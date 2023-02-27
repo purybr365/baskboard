@@ -21,7 +21,7 @@ import { getTxs } from '../framework/get-transactions';
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function GetPortfolios () {
-  const queryFunction = 'get-portfolios&perPage=999';
+  const queryFunction = 'get-portfolios&perPage=999&networkName=polygon';
   const { data, error } = useSWR('/api/get-data' + '?queryFunction=' + queryFunction, fetcher);
   
   return {

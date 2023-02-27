@@ -80,7 +80,7 @@ export function TvlByAssetComponent({ data }) {
                       <td className="whitespace-nowrap py-2 pl-4 pr-1 text-sm font-medium text-gray-200 sm:pl-6 md:pl-0">
                         {asset.symbol}
                       </td>
-                      <td className="whitespace-nowrap py-2 px-3 text-left text-sm text-gray-200">{asset.amountInUsd.toFixed(2)}</td>
+                      <td className="whitespace-nowrap py-2 px-3 text-left text-sm text-gray-200">{asset.amountInUsd?.toFixed(2)}</td>
                       <td className="whitespace-nowrap py-2 px-3 text-left text-sm text-gray-200">TBC</td>
                     </tr>
                   ))}

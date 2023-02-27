@@ -4,7 +4,7 @@ import Tooltip from '@mui/material/Tooltip'
 function OneByOne({ data }) {
   
   const number = (data[2] === "$_thousands") ?
-    <span className="text-white font-light text-amber-500 text-3xl">$<span className="font-bold text-white">{ (data[1]/1000).toFixed(1) }k</span></span>
+    <span className="text-white font-light text-amber-500 text-3xl">$<span className="font-bold text-white">{ (data[1]/1000)?.toFixed(1) }k</span></span>
     :
     <span className="text-white font-bold text-3xl">{ data[1] }</span>
     
