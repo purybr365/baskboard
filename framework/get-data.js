@@ -4,7 +4,7 @@
 //const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const baseUrls = {
-  "root": "https://usepicnic.com",
+  "root": "https://dev.usepicnic.com",
   "get-portfolios": "/api/get-portfolios/",
   "get-tvl": "/api/v1/get-tvl/",
 };
