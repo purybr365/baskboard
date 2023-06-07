@@ -256,11 +256,11 @@ export default function App() {
           </div>
 
           <h1 className='text-center text-4xl text-white font-mono my-10'>
-            Easy Dashboard
+            Picnic Brasil Dashboard
           </h1>
           
           <div className='mx-auto grid grid-cols-2 lg:grid-cols-6'>
-            <OneByOne data={["Unique Users", metrics?.easyUsers]} />
+            <OneByOne data={["UDA", metrics?.easyUsers]} />
             <OneByOne data={["Acct TVL", metrics?.easyAccountTvl, "$_thousands"]} />
             <OneByOne data={["Invest TVL", metrics?.easyInvestmentsTvl, "$_thousands"]} />
             <OneByOne data={["Total TVL", metrics?.easyInvestmentsTvl + metrics?.easyAccountTvl, "$_thousands"]} />
@@ -268,6 +268,10 @@ export default function App() {
             <OneByOne data={["Retention 1D", metrics?.easyRetention1Day, "percentage"]} />
             <OneByOne data={["Retention 7D", metrics?.easyRetention7Days, "percentage"]} />
             <OneByOne data={["Retention 30D", metrics?.easyRetention30Days, "percentage"]} />
+            <OneByOne data={["Users", metrics?.numberOfAddressesWithBalanceOrPortfolio]} />
+            <OneByOne data={["Investing Users", metrics?.numberOfAddressesCurrentlyInvesting]} />
+            <OneByOne data={["Non-investing Users", metrics?.numberOfAddressesWithBalanceButNoPortfolio]} />
+            <OneByOne data={["Total Historical Users", metrics?.numberOfAddressesThatInvestedOnce]} />
           </div>
         </>
         :
